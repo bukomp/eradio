@@ -6,3 +6,9 @@
  * Time: 10.56
  */
 
+function upload(){}
+
+function edit(){}
+
+function songDelete(){}
+
