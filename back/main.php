@@ -6,6 +6,9 @@
  * Time: 10.56
  */
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
+
 $uri = "http://media.mw.metropolia.fi/wbma";
 
 
@@ -99,6 +102,9 @@ switch($uriSegments[5]){
         break;
     case "delete":
         echo songDelete($uri, $uriSegments[6], $result->token);
+        break;
+    default:
+        echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/main.php/"any from below here" <br><br>upload<br>edit/"id"<br>delete/"id"</h1>';
         break;
 }
 
