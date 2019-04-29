@@ -43,7 +43,7 @@ class RegistrationForm extends Component {
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success', response));
-  }
+  };
 
   render(){
     return(
