@@ -23,3 +23,4 @@ const deleteFile = (id) => {
   return fetch("http://lira.fi/school/webradio/back/main.php/delete/"+id).then(response => response.json())
 };
 
+
