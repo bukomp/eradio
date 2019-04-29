@@ -1,5 +1,6 @@
 import {React, Component} from 'react';
 import './App.css';
+import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 
 class App extends Component{
 constructor(props) {
@@ -10,8 +11,13 @@ constructor(props) {
 }
   render() {
     return (
-      "plaseholder"
+
+        <React.Fragment>
+          <RegistrationForm/>
+        </React.Fragment>
+
     );
+    
   }
 }
 
