@@ -33,7 +33,7 @@ function upload($data, $file, $uri, $token){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: multipart/form-data',
-        'x-access-token:'.$token
+        'x-access-token: '.$token
     ]);
 
     $result=curl_exec ($ch);
@@ -68,7 +68,7 @@ function songDelete($uri, $id, $token){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: application/json',
-        'x-access-token:'.$token
+        'x-access-token: '.$token
     ]);
     $result = curl_exec ($ch);
     curl_close ($ch);
