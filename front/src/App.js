@@ -1,4 +1,4 @@
-import { Component} from 'react';
+import {Component} from 'react';
 import React from'react';
 import './App.css';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
@@ -8,6 +8,7 @@ class App extends Component{
 constructor(props) {
   super(props);
   this.state = {
+
   };
 }
   render() {

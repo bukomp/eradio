@@ -11,15 +11,15 @@ import './style.css'
         };
         this.handleChange = this.handleChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
-
       }
+
       handleChange(event) {
-        console.log('email was changed', event.target.value);
+        console.log('user was changed', event.value);
         this.setState({username: event.target.value});
       }
 
       handlePasswordChange(event) {
-        console.log('password was changed', event.target.value);
+        console.log('password was changed', event.value);
         this.setState({password:event.target.value});
       }
 
@@ -35,11 +35,29 @@ import './style.css'
         })
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success', response));
-      }
+        .then(response => {
+          console.log('Success', response);
+          window.localStorage.setItem('token',response.token);
+          console.log(window.localStorage.getItem('token'));
+
+        });
+
+        if (localStorage.user !== "undefined") {
+          console.log(window.localStorage.getItem('token'));
+
+        } else {
+          console.log('error');
+        }
+      };
+
+
+
 
       render(){
         return(
+            <div className="center">
+              <div className="card">
+                <h1>Login</h1>
             <form onSubmit={this.handleSubmit}>
               <input
                   type="text"
@@ -53,10 +71,10 @@ import './style.css'
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
               />
-
-
               <button>Login</button>
             </form>
+              </div>
+            </div>
         )
       }
     }
