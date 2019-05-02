@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './style.css'
+import { Link, NavLink, withRouter, BrowserRouter, Route} from 'react-router-dom';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
+
 
     class LoginForm extends Component {
       constructor() {
@@ -7,7 +10,6 @@ import './style.css'
         this.state = {
           username: '',
           password: '',
-
         };
         this.handleChange = this.handleChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -25,6 +27,7 @@ import './style.css'
 
       handleSubmit = event => {
         event.preventDefault();
+
         const url = "http://media.mw.metropolia.fi/wbma/login";
         const data = {username: this.state.username, password: this.state.password, email: this.state.email};
         console.log('Login is successful.', data);
@@ -39,7 +42,6 @@ import './style.css'
           console.log('Success', response);
           window.localStorage.setItem('token',response.token);
           console.log(window.localStorage.getItem('token'));
-
         });
 
         if (localStorage.user !== "undefined") {
@@ -48,35 +50,74 @@ import './style.css'
         } else {
           console.log('error');
         }
+
       };
 
-
-
-
       render(){
+
+        if(!this.props.show) {
+          return null;
+        }
+
+        // The modal "window"
+        const modalStyle = {
+          backgroundColor: 'whitesmoke',
+          borderRadius: 5,
+          borderColor: "black",
+          borderStyle: "solid",
+          maxWidth: 400,
+          minHeight: 300,
+          marginLeft: 650,
+          marginTop: 0,
+          padding: 15
+        };
+
+        const registrationForm = () => (
+            <RegistrationForm
+            />
+        )
         return(
-            <div className="center">
-              <div className="card">
-                <h1>Login</h1>
+            <div>
+
+                <div className="modal" style={modalStyle}>
+                  {this.props.children}
+                <button className="close"
+                         onClick={this.props.onClose}>
+                  X
+                </button>
+
             <form onSubmit={this.handleSubmit}>
               <input
                   type="text"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
+                  required
               />
               <input
                   type="password"
                   placeholder="Password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
+                  required
               />
-              <button>Login</button>
+              <button type="submit">Sign In</button>
+
             </form>
+                  <Link to="/RegistrationForm">
+
+                    <p>Be an active listener. Register here.</p>
+
+                  </Link>
+                  <Route path="/RegistrationForm" render={()=> registrationForm()}></Route>
+
               </div>
+
             </div>
+
         )
+
       }
     }
 
-export default LoginForm;
+export default withRouter(LoginForm);

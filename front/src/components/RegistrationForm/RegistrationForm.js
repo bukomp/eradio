@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './style.css'
+import { NavLink, withRouter} from 'react-router-dom';
+
 
 class RegistrationForm extends Component {
   constructor() {
@@ -7,7 +9,8 @@ class RegistrationForm extends Component {
     this.state = {
       username: '',
       password: '',
-      email:''
+      email:'',
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -46,19 +49,45 @@ class RegistrationForm extends Component {
   };
 
   render(){
+    if(!this.props.show) {
+      return null;
+    }
+// The modal "window"
+    const modalStyle = {
+      backgroundColor: 'whitesmoke',
+      borderRadius: 5,
+      borderColor: "black",
+      borderStyle: "solid",
+      maxWidth: 400,
+      minHeight: 300,
+      marginLeft: 650,
+      marginTop: 0,
+      padding: 15,
+    };
+
     return(
+        <React.Fragment>
+          <div className="modal" style={modalStyle}>
+            {this.props.children}
+            <button
+                    onClick={this.props.onClose}>
+              X
+            </button>
+
         <form onSubmit={this.handleSubmit}>
           <input
               type="text"
               placeholder="Username"
               value={this.state.username}
               onChange={this.handleChange}
+              required
           />
           <input
               type="password"
               placeholder="Password"
               value={this.state.password}
               onChange={this.handlePasswordChange}
+              required
           />
 
           <input
@@ -66,10 +95,16 @@ class RegistrationForm extends Component {
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleEmailChange}
+              required
           />
 
           <button>Save</button>
+          <NavLink to="/LoginForm">Sign In</NavLink>
+
         </form>
+          </div>
+        </React.Fragment>
+
     )
   }
 }
