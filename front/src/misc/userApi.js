@@ -18,3 +18,12 @@ function removeFavourite(token, songId) {
     body: JSON.stringify({"file_id":songId})
   }).then(res => res.json())
 }
+
+function getFavouriteList(token) {
+  return fetch("http://media.mw.metropolia.fi/wbma/favourites",{
+    method:"GET",
+    headers:{
+      'x-access-token':token,
+    }
+  }).then(res => res.json())
+}

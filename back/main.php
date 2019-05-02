@@ -6,9 +6,6 @@
  * Time: 10.56
  */
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
-
 $uri = "http://media.mw.metropolia.fi/wbma";
 
 
@@ -33,7 +30,7 @@ function upload($data, $file, $uri, $token){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: multipart/form-data',
-        'x-access-token:'.$token
+        'x-access-token: '.$token
     ]);
 
     $result=curl_exec ($ch);
@@ -68,11 +65,28 @@ function songDelete($uri, $id, $token){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: application/json',
-        'x-access-token:'.$token
+        'x-access-token: '.$token
     ]);
     $result = curl_exec ($ch);
     curl_close ($ch);
     return $result;
+}
+
+function checkAdmin($id){
+    $isAdmin = null;
+    $adminsFile = fopen("admins","r");
+    $admins = fread($adminsFile, filesize("admins"));
+    $admins = json_decode($admins);
+    fclose($adminsFile);
+    foreach ($admins as $u){
+        if($u == $id){
+            $isAdmin = true;
+            break;
+        } else {
+            $isAdmin = false;
+        }
+    }
+    return json_encode($isAdmin);
 }
 
 $adminData = [
@@ -102,6 +116,9 @@ switch($uriSegments[5]){
         break;
     case "delete":
         echo songDelete($uri, $uriSegments[6], $result->token);
+        break;
+    case "login":
+        echo checkAdmin($_POST['id']);
         break;
     default:
         echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/main.php/"any from below here" <br><br>upload<br>edit/"id"<br>delete/"id"</h1>';
