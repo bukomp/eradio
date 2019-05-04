@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../css/front.css';
 import RegistrationForm from './FrontPage/RegistrationForm/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm/LoginForm';
+import AudioPlayer from "./AudioPlayer/AudioPlayer";
 
 const FrontPage = (props) => {
   const [login, setLogin] = useState({isOpen: false, isOpenReg: false,});
@@ -26,7 +27,7 @@ const FrontPage = (props) => {
 /*  return (<div>front</div>);*/
     return (
         <React.Fragment>
-
+          <AudioPlayer/>
           <button onClick={toggleLogin}>Login</button>
           <LoginForm
               show={login.isOpen}

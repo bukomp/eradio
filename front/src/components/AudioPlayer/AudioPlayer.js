@@ -20,13 +20,7 @@ class AudioPlayer extends Component {
     for(let g of playlist.data){
       console.log(g);
       console.log(((g.time -(new Date().getTime() - g.duration))));
-      if(
-        date.getDate() === g.date.day &&
-        date.getMonth()+1 === g.date.month &&
-        date.getFullYear() === g.date.year &&
-        ((g.time -(new Date().getTime() - g.duration)))>0
-
-      ){
+      if( ((g.time -(new Date().getTime() - g.duration)))>0 ){
         playlistTemp.playlist.push(g);
       }
     }
@@ -52,15 +46,6 @@ class AudioPlayer extends Component {
     playlistTemp.playlist.shift();
     console.log(playlistTemp);
     this.setState(playlistTemp);
-    /*//this.setState({playReady:false});
-    const tempArr = this.state;
-    for(let g of this.state.playlist){
-      if(((g.time -(new Date().getTime() - g.duration)))>=0){
-        const player = this.player.current;
-        player.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
-        player.src=this.state.webFrom+this.playNow()
-      }
-    }*/
   };
 
   componentDidMount(){
