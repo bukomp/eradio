@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import {downloadPlaylist, songPlayed} from '../../misc/playlistApi';
+import {Button} from '@material-ui/core';
 
 class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.player = React.createRef();
     this.state = {
+      paused:false,
       playlist:[],
       webFrom:"http://media.mw.metropolia.fi/wbma/uploads/"
 
     };
+
   }
 
   sortTodayPlaylist(playlist) {
@@ -29,15 +32,49 @@ class AudioPlayer extends Component {
   }
 
   playNow() {
-    for(let g of this.state.playlist){
-      if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
+    if(this.state !== undefined){
+      for(let g of this.state.playlist){
+        if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
 
-        const player = this.player.current;
-        player.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
-        return g.id;
+          this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
+          return g.id;
+        }
       }
     }
   }
+
+  resume = () => {
+    this.setState({paused:false});
+
+
+      for(let g of this.state.playlist){
+        if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
+          this.player.current.src = this.state.webFrom+this.state.playlist[0].id;
+          this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
+        }
+      }
+
+
+
+  };
+
+  pause = () => {
+    this.player.current.src = undefined;
+    this.setState({paused: true});
+  };
+
+  switchButton = () => {
+    switch (this.state.paused){
+      case true:
+        this.resume();
+        break;
+      case false:
+        this.pause();
+        break;
+    }
+
+    console.log(this.state);
+  };
 
   audioEnd = () => {
 
@@ -48,7 +85,7 @@ class AudioPlayer extends Component {
     this.setState(playlistTemp);
   };
 
-  componentDidMount(){
+  componentWillMount(){
     downloadPlaylist().then(res => {
       this.setState(this.sortTodayPlaylist(res));
     })
@@ -56,20 +93,18 @@ class AudioPlayer extends Component {
 
   webPlayer = () => {
     return (
-      <audio autoPlay controls ref={this.player} onEnded={this.audioEnd}>
-        {
-          this.state.playReady &&
-          <source src={this.state.webFrom+this.playNow()} type="audio/mpeg"/>
-        }
-      </audio>
+      <React.Fragment>
+      <audio autoPlay ref={this.player} onEnded={this.audioEnd} src={this.state.webFrom+this.playNow()}/>
+      <Button onClick={this.switchButton}>button</Button>
+      </React.Fragment>
     );
   };
 
-
-
   render(){
     return(
-      this.webPlayer()
+      <React.Fragment>
+        {this.webPlayer()}
+      </React.Fragment>
     );
   }
 }
