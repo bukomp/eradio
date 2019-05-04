@@ -6,6 +6,7 @@ import './App.css';
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 import FrontOffice from "./pages/frontOffice";
+import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 
 class App extends Component{
 constructor(props) {
@@ -43,6 +44,9 @@ constructor(props) {
                 show={this.state.isOpen}
                 onClose={this.toggleLogin}>
               </FrontOffice>
+            )}/>
+            <Route path="/player" render={(props) => (
+              <AudioPlayer/>
             )}/>
 
 

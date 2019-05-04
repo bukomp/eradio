@@ -6,6 +6,9 @@
  * Time: 10.56
  */
 
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
+
 $uri = "http://media.mw.metropolia.fi/wbma";
 
 
@@ -17,26 +20,28 @@ function upload($data, $file, $uri, $token){
     $target = 'tempFile/'.$newName;
     move_uploaded_file( $file['file']['tmp_name'], $target);
 
-    if (function_exists('curl_file_create')) { // php 5.5+
-        $cFile = curl_file_create($target,mime_content_type ($target));
-    } else { //
-        $cFile = '@' . realpath($target);
-    }
+    $cFile = curl_file_create($target,mime_content_type($target));
+
 
     $post = array('title'=>$data['title'], 'description'=>$data['description'], 'file'=> $cFile);
+
     $ch = curl_init();
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_URL,$uri."/media");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: multipart/form-data',
-        'x-access-token: '.$token
+        'Content-Type:multipart/form-data',
+        'Access-Control-Allow-Origin:*',
+        'x-access-token:'.$token
     ]);
 
-    $result=curl_exec ($ch);
+    $result = curl_exec ($ch);
     curl_close ($ch);
 
+
     unlink($target);
+
 
     return $result;
 }
@@ -50,6 +55,7 @@ function edit($data, $uri, $id, $token){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'x-access-token: '.$token,
+        'Access-Control-Allow-Origin:*',
         'Content-Type: application/x-www-form-urlencoded'
     ]);
     $result = curl_exec ($ch);
@@ -65,6 +71,7 @@ function songDelete($uri, $id, $token){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: application/json',
+        'Access-Control-Allow-Origin:*',
         'x-access-token: '.$token
     ]);
     $result = curl_exec ($ch);
@@ -100,7 +107,10 @@ curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_URL, $uri."/login");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $myJSON);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Access-Control-Allow-Origin:*',
+    'Content-Type: application/json'
+]);
 $result = curl_exec ($ch);
 $result = json_decode($result);
 curl_close ($ch);
