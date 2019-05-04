@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './style.css'
-import { Link, NavLink, withRouter, BrowserRouter, Route} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
 
     class LoginForm extends Component {
-      constructor() {
-        super();
+      constructor(props) {
+        super(props);
         this.state = {
           username: '',
           password: '',
@@ -44,7 +44,7 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm';
           console.log(window.localStorage.getItem('token'));
         });
 
-        if (localStorage.user !== "undefined") {
+        if (localStorage.user !== undefined) {
           console.log(window.localStorage.getItem('token'));
 
         } else {
@@ -75,10 +75,9 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm';
         const registrationForm = () => (
             <RegistrationForm
             />
-        )
+        );
         return(
             <div>
-
                 <div className="modal" style={modalStyle}>
                   {this.props.children}
                 <button className="close"
@@ -104,12 +103,11 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm';
               <button type="submit">Sign In</button>
 
             </form>
-                  <Link to="/RegistrationForm">
+                  <Link to="/register">
 
                     <p>Be an active listener. Register here.</p>
 
                   </Link>
-                  <Route path="/RegistrationForm" render={()=> registrationForm()}></Route>
 
               </div>
 
@@ -120,4 +118,4 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm';
       }
     }
 
-export default withRouter(LoginForm);
+export default LoginForm;

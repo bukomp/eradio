@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './style.css'
-import { NavLink, withRouter} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 
 class RegistrationForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       password: '',
@@ -99,7 +99,7 @@ class RegistrationForm extends Component {
           />
 
           <button>Save</button>
-          <NavLink to="/LoginForm">Sign In</NavLink>
+          <Link to="/">Sign In</Link>
 
         </form>
           </div>

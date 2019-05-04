@@ -1,9 +1,11 @@
 import {Component} from 'react';
 import React from'react';
-import {Router, Switch, Route, NavLink, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, NavLink, BrowserRouter} from 'react-router-dom';
+
 import './App.css';
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import LoginForm from "./components/LoginForm/LoginForm";
+import FrontOffice from "./pages/frontOffice";
 
 class App extends Component{
 constructor(props) {
@@ -33,23 +35,36 @@ constructor(props) {
   render() {
     return (
 
-        <React.Fragment>
+          <Router basename='/school/webradio/front'>
+            <button onClick={this.toggleLogin}>Login</button>
+            <Route exact path="/" render={(props) => (
+              <FrontOffice
+                {...props}
+                show={this.state.isOpen}
+                onClose={this.toggleLogin}>
+              </FrontOffice>
+            )}/>
 
-          <button onClick={this.toggleLogin}>Login</button>
-          <LoginForm
-              show={this.state.isOpen}
-              onClose={this.toggleLogin}>
-          </LoginForm>
 
-          <RegistrationForm
-              show={this.state.isOpenReg}
-              onClose={this.toggleRegistration}>
-          </RegistrationForm>
+          </Router>
 
-        </React.Fragment>
   );
 
   }
 }
 
 export default App;
+/*<Route exact path="/" render={(props) => (
+              <LoginForm
+                {...props}
+                show={this.state.isOpen}
+                onClose={this.toggleLogin}>
+              </LoginForm>
+            )}/>
+            <Route exact path="/register" render={(props) => (
+              <RegistrationForm
+                {...props}
+                show={this.state.isOpenReg}
+                onClose={this.toggleRegistration}>
+              </RegistrationForm>
+            )}/>*/
