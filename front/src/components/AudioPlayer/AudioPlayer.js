@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {downloadPlaylist, songPlayed} from '../../misc/playlistApi';
+import {downloadPlaylist} from '../../misc/playlistApi';
 import {Button} from '@material-ui/core';
 
 class AudioPlayer extends Component {
