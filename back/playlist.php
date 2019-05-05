@@ -18,7 +18,7 @@ function played(){
 
     foreach ($playlist["data"] as $u){
         if($u["played"] == false){
-            $u["played"] == true;
+            $u["played"] = true;
             return true;
         }
     }

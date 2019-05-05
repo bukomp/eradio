@@ -96,6 +96,17 @@ function checkAdmin($id){
     return json_encode($isAdmin);
 }
 
+function getFiles($uri){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $uri."/media/user/1103");
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $result = curl_exec ($ch);
+    curl_close ($ch);
+    return $result;
+}
+
 $adminData = [
     "username" => "webradio",
     "password" => "webRadio2019!"
@@ -129,6 +140,9 @@ switch($uriSegments[5]){
         break;
     case "login":
         echo checkAdmin($_POST['id']);
+        break;
+    case "files":
+        echo getFiles($uri);
         break;
     default:
         echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/main.php/"any from below here" <br><br>upload<br>edit/"id"<br>delete/"id"</h1>';

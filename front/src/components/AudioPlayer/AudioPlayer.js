@@ -17,7 +17,6 @@ class AudioPlayer extends Component {
 
   sortTodayPlaylist(playlist) {
     //console.log(playlist);
-    const date = new Date();
     const playlistTemp = this.state;
     playlistTemp.playReady = true;
     for(let g of playlist.data){

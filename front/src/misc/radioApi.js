@@ -35,4 +35,8 @@ const getAdmins = (id) => {
   }).then(res => res.json())
 };
 
+const getFiles = () => {
+  return fetch("http://lira.fi/school/webradio/back/main.php/files")
+    .then(res => res.json())
+};
 export {getAdmins};
