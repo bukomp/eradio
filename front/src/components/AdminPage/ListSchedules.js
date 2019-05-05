@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 const ListSchedules = () => {
   return (
-      <div id='listSchedules'>
+      <div className='listSchedules'>
         List of Schedules goes here
       </div>
   )

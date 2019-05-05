@@ -26,7 +26,6 @@ const FrontPage = (props) => {
 
   };
 
-/*  return (<div>front</div>);*/
     return (
         <React.Fragment>
           <AudioPlayer/>

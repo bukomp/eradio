@@ -6,7 +6,7 @@ import ListSchedules from './AdminPage/ListSchedules';
 
 const AdminPage = (props) => {
   return (
-      <div id='interface'>
+      <div className='interface'>
         <ListFiles/>
         <ListSchedules/>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListFiles = () => {
   return (
-      <div id='listFiles'>
+      <div className='listFiles'>
         List of Files goes here
       </div>
   )
