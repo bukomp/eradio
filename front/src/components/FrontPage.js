@@ -7,7 +7,7 @@ import {Button} from '@material-ui/core';
 
 
 const FrontPage = (props) => {
-  const [login, setLogin] = useState({isOpen: false, isOpenReg: false,});
+  const [login, setLogin] = useState({isOpen: false, isOpenReg: false});
 
   const toggleLogin = () => {
     setLogin({
@@ -51,6 +51,7 @@ const FrontPage = (props) => {
               show={login.isOpenReg}
               onClose={toggleRegistration}>
           </RegistrationForm>
+
         </React.Fragment>
     );
 };
