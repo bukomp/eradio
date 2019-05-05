@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './style.css'
-import { Link, NavLink, withRouter, BrowserRouter, Route} from 'react-router-dom';
+import '../../../css/front.css';
+import { Link, withRouter} from 'react-router-dom';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
 class LoginForm extends Component {
@@ -75,10 +75,6 @@ class LoginForm extends Component {
       padding: 15,
     };
 
-    const registrationForm = () => (
-        <RegistrationForm
-        />
-    );
     return (
         <div>
 
@@ -107,13 +103,7 @@ class LoginForm extends Component {
               <button type="submit">Sign In</button>
 
             </form>
-            <Link to="/RegistrationForm">
 
-              <p>Be an active listener. Register here.</p>
-
-            </Link>
-            <Route path="/RegistrationForm"
-                   render={() => registrationForm()}></Route>
 
           </div>
 

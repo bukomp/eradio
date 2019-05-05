@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './style.css'
-import { NavLink, withRouter} from 'react-router-dom';
+import '../../../css/front.css';
+import { Link, withRouter} from 'react-router-dom';
 
 class RegistrationForm extends Component {
   constructor() {
@@ -9,12 +9,11 @@ class RegistrationForm extends Component {
       username: '',
       password: '',
       email: '',
-
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-
   }
 
   handleChange(event) {
@@ -102,10 +101,11 @@ class RegistrationForm extends Component {
               />
 
               <button>Save</button>
-              <NavLink to="/LoginForm">Sign In</NavLink>
 
             </form>
+
           </div>
+
         </React.Fragment>
 
     );

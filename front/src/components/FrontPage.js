@@ -21,7 +21,9 @@ const FrontPage = (props) => {
 
   const logout = () => {
     window.localStorage.clear();
+    window.location.href = '/';
     setLogin({user: null})
+
   };
 
 /*  return (<div>front</div>);*/
@@ -32,13 +34,13 @@ const FrontPage = (props) => {
           <LoginForm
               show={login.isOpen}
               onClose={toggleLogin}>
+          <button className="registration" onClick={toggleRegistration}>Be an active listener. Register here.</button>
           </LoginForm>
 
           <RegistrationForm
               show={login.isOpenReg}
               onClose={toggleRegistration}>
           </RegistrationForm>
-
         </React.Fragment>
     );
 };
