@@ -10,7 +10,7 @@ class AudioPlayer extends Component {
       paused:false,
       playlist:[],
       webFrom:"http://media.mw.metropolia.fi/wbma/uploads/",
-      song:null
+      song:""
     };
 
   }
@@ -37,17 +37,13 @@ class AudioPlayer extends Component {
     return playlistTemp;
   }
 
-  playNow() {
-    if(this.state !== undefined){
-      for(let g of this.state.playlist){
-        if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
-
-          this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
-          return g.id;
-        }
-      }
+  playNow= () => {
+    const g = this.state.playlist[0];
+    if(this.state !== undefined && g !== undefined){
+      this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
+      return g.id;
     }
-  }
+  };
 
   resume = () => {
     this.setState({paused: false, muted: false});
@@ -56,6 +52,14 @@ class AudioPlayer extends Component {
 
   pause = () => {
     this.setState({paused: true, muted: true});
+  };
+
+  debugPlay = () => {
+    setTimeout(()=> {
+      setInterval(() => {
+        this.player.current.play();
+      }, 1000);
+    },1000);
   };
 
   switchButton = () => {
@@ -72,7 +76,7 @@ class AudioPlayer extends Component {
   };
 
   audioEnd = () => {
-    if(this.state.playlist[1].id !== undefined) {
+    if(this.state.playlist[1] !== undefined) {
       const playlistTemp = this.state;
       playlistTemp.song = this.state.webFrom + this.state.playlist[1].id;
       playlistTemp.playlist.shift();
@@ -86,8 +90,9 @@ class AudioPlayer extends Component {
   webPlayer = () => {
     return (
       <React.Fragment>
-      <audio autoPlay ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
-      <Button onClick={this.switchButton}>button</Button>
+        <audio autoPlay onCanPlay={this.debugPlay} onPlaying={()=>{clearInterval(setInterval(()=>{this.player.current.play();}, 500))}} ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
+
+        <Button variant={"contained"} onClick={this.switchButton}>button</Button>
       </React.Fragment>
     );
   };

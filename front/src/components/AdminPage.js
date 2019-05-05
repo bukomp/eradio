@@ -10,9 +10,9 @@ const AdminPage = () => {
   const [files, setFiles] = useState({});
   useEffect(() => {getFiles().then(response => setFiles(response.data))}, []);
   return (
-      <div>
-          <ListFiles files={files}/>
-          <ListSchedules/>
+      <div className='interface'>
+        <ListFiles files={files}/>
+        <ListSchedules/>
       </div>
     );
 };

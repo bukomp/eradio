@@ -11,7 +11,7 @@ const ListFiles = ({files}) => {
     )};
 
   return (
-      <div id='listFiles'>
+      <div className='listFiles'>
         {files.length && listEachFile(files)}
       </div>
   )

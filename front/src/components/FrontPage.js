@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/front.css';
-import RegistrationForm from './FrontPage/RegistrationForm/RegistrationForm';
-import LoginForm from './FrontPage/LoginForm/LoginForm';
+import RegistrationForm from './FrontPage/RegistrationForm';
+import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
 
 const FrontPage = (props) => {
@@ -21,8 +21,11 @@ const FrontPage = (props) => {
 
   const logout = () => {
     window.localStorage.clear();
+    window.location.href = '/';
     setLogin({user: null})
+
   };
+
     return (
         <React.Fragment>
           <AudioPlayer/>
@@ -30,6 +33,7 @@ const FrontPage = (props) => {
           <LoginForm
               show={login.isOpen}
               onClose={toggleLogin}>
+          <button className="registration" onClick={toggleRegistration}>Be an active listener. Register here.</button>
           </LoginForm>
 
           <RegistrationForm
