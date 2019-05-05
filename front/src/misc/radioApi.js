@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 const uploadFile = (data) => {
   return fetch("http://lira.fi/school/webradio/back/main.php/upload/", {

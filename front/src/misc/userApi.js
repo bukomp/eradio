@@ -1,4 +1,3 @@
-
 function addFavourite(token, songId) {
   return fetch("http://media.mw.metropolia.fi/wbma/favourites",{
     method:"POST",
