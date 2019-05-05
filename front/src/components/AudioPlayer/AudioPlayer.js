@@ -9,10 +9,16 @@ class AudioPlayer extends Component {
     this.state = {
       paused:false,
       playlist:[],
-      webFrom:"http://media.mw.metropolia.fi/wbma/uploads/"
-
+      webFrom:"http://media.mw.metropolia.fi/wbma/uploads/",
+      song:null
     };
 
+  }
+
+  componentWillMount(){
+    downloadPlaylist().then(res => {
+      this.setState(this.sortTodayPlaylist(res));
+    })
   }
 
   sortTodayPlaylist(playlist) {
@@ -26,6 +32,7 @@ class AudioPlayer extends Component {
         playlistTemp.playlist.push(g);
       }
     }
+    playlistTemp.song = playlistTemp.webFrom+this.playNow();
     console.log(playlistTemp);
     return playlistTemp;
   }
@@ -43,23 +50,12 @@ class AudioPlayer extends Component {
   }
 
   resume = () => {
-    this.setState({paused:false});
-
-
-      for(let g of this.state.playlist){
-        if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
-          this.player.current.src = this.state.webFrom+this.state.playlist[0].id;
-          this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
-        }
-      }
-
-
+    this.setState({paused: false, muted: false});
 
   };
 
   pause = () => {
-    this.player.current.src = undefined;
-    this.setState({paused: true});
+    this.setState({paused: true, muted: true});
   };
 
   switchButton = () => {
@@ -76,24 +72,21 @@ class AudioPlayer extends Component {
   };
 
   audioEnd = () => {
-
-    this.player.current.src=this.state.webFrom+this.state.playlist[1].id;
-    const playlistTemp = this.state;
-    playlistTemp.playlist.shift();
-    console.log(playlistTemp);
-    this.setState(playlistTemp);
+    if(this.state.playlist[1].id !== undefined) {
+      const playlistTemp = this.state;
+      playlistTemp.song = this.state.webFrom + this.state.playlist[1].id;
+      playlistTemp.playlist.shift();
+      console.log(playlistTemp);
+      this.setState(playlistTemp);
+    } else {
+      console.log("There is an error on Radio Station :(");
+    }
   };
-
-  componentWillMount(){
-    downloadPlaylist().then(res => {
-      this.setState(this.sortTodayPlaylist(res));
-    })
-  }
 
   webPlayer = () => {
     return (
       <React.Fragment>
-      <audio autoPlay ref={this.player} onEnded={this.audioEnd} src={this.state.webFrom+this.playNow()}/>
+      <audio autoPlay ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
       <Button onClick={this.switchButton}>button</Button>
       </React.Fragment>
     );
