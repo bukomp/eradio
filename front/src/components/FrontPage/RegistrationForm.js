@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../css/front.css';
-import { Link, withRouter} from 'react-router-dom';
 
 class RegistrationForm extends Component {
   constructor() {
@@ -40,6 +39,7 @@ class RegistrationForm extends Component {
       email: this.state.email,
     };
     console.log('form is submitted.', data);
+
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -54,6 +54,7 @@ class RegistrationForm extends Component {
     if (!this.props.show) {
       return null;
     }
+
 // The modal "window"
     const modalStyle = {
       backgroundColor: 'whitesmoke',
@@ -91,7 +92,6 @@ class RegistrationForm extends Component {
                   onChange={this.handlePasswordChange}
                   required
               />
-
               <input
                   type="email"
                   placeholder="Email"
