@@ -21,7 +21,7 @@ body{
 }
 
 .interface {
-display: inline;
+    display: inline;
 }
 
 .interface > div {
