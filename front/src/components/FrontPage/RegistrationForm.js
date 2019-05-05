@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
-import '../../../css/front.css';
+import '../../css/front.css';
 import { Link, withRouter} from 'react-router-dom';
-import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
-class LoginForm extends Component {
+class RegistrationForm extends Component {
   constructor() {
     super();
     this.state = {
       username: '',
       password: '',
+      email: '',
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
   }
 
   handleChange(event) {
-    console.log('user was changed', event.value);
+    console.log('email was changed', event.target.value);
     this.setState({username: event.target.value});
   }
 
   handlePasswordChange(event) {
-    console.log('password was changed', event.value);
+    console.log('password was changed', event.target.value);
     this.setState({password: event.target.value});
+  }
+
+  handleEmailChange(event) {
+    console.log('email was changed', event.target.value);
+    this.setState({email: event.target.value});
   }
 
   handleSubmit = event => {
     event.preventDefault();
-
-    const url = 'http://media.mw.metropolia.fi/wbma/login';
+    const url = 'http://media.mw.metropolia.fi/wbma/users';
     const data = {
       username: this.state.username,
       password: this.state.password,
       email: this.state.email,
     };
-    console.log('Login is successful.', data);
+    console.log('form is submitted.', data);
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -41,28 +47,14 @@ class LoginForm extends Component {
     }).
         then(res => res.json()).
         catch(error => console.error('Error:', error)).
-        then(response => {
-          console.log('Success', response);
-          window.localStorage.setItem('token', response.token);
-          console.log(window.localStorage.getItem('token'));
-        });
-
-    if (localStorage.user !== 'undefined') {
-      console.log(window.localStorage.getItem('token'));
-
-    } else {
-      console.log('error');
-    }
-
+        then(response => console.log('Success', response));
   };
 
   render() {
-
     if (!this.props.show) {
       return null;
     }
-
-    // The modal "window"
+// The modal "window"
     const modalStyle = {
       backgroundColor: 'whitesmoke',
       borderRadius: 5,
@@ -76,12 +68,11 @@ class LoginForm extends Component {
     };
 
     return (
-        <div>
-
+        <React.Fragment>
           <div className="modal" style={modalStyle}>
             {this.props.children}
-            <button className="close"
-                    onClick={this.props.onClose}>
+            <button
+                onClick={this.props.onClose}>
               X
             </button>
 
@@ -100,18 +91,25 @@ class LoginForm extends Component {
                   onChange={this.handlePasswordChange}
                   required
               />
-              <button type="submit">Sign In</button>
+
+              <input
+                  type="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.handleEmailChange}
+                  required
+              />
+
+              <button>Save</button>
 
             </form>
 
-
           </div>
 
-        </div>
+        </React.Fragment>
 
     );
-
   }
 }
 
-export default withRouter(LoginForm);
+export default RegistrationForm;

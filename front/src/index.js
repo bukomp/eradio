@@ -5,7 +5,7 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import FrontPage from './components/FrontPage';
 import AdminPage from './components/AdminPage';
 import RegistrationForm
-  from './components/FrontPage/RegistrationForm/RegistrationForm';
+  from './components/FrontPage/RegistrationForm';
 
 
 ReactDOM.render(
