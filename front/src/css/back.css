@@ -2,6 +2,14 @@ body{
     background-color: whitesmoke;
 }
 
+.interface {
+    display: inline;
+}
+
+.interface > div {
+    background-color: rgba(255,255,255,0.9);
+}
+
 .listFiles {
     box-sizing: border-box;
     border: 2px solid chartreuse;
@@ -20,10 +28,15 @@ body{
     position: relative;
 }
 
-.interface {
-    display: inline;
+.eachSong {
+    border: 1px solid black;
+    padding: 10px 20px;
+    margin: 5px 0;
+    background-color: rgba(255, 255, 160, 0.9);
 }
 
-.interface > div {
-    background-color: rgba(255,255,255,0.9);
+button {
+    margin: 0 5px;
+    border-radius: 25px;
+    background-color: lightslategrey;
 }
