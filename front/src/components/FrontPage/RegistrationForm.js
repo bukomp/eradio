@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../css/front.css';
 
 class RegistrationForm extends Component {
   constructor() {
@@ -55,22 +54,10 @@ class RegistrationForm extends Component {
       return null;
     }
 
-// The modal "window"
-    const modalStyle = {
-      backgroundColor: 'whitesmoke',
-      borderRadius: 5,
-      borderColor: 'black',
-      borderStyle: 'solid',
-      maxWidth: 400,
-      minHeight: 300,
-      marginLeft: 650,
-      marginTop: 0,
-      padding: 15,
-    };
 
     return (
         <React.Fragment>
-          <div className="modal" style={modalStyle}>
+          <div className="modal">
             {this.props.children}
             <button
                 onClick={this.props.onClose}>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../css/front.css';
 import { Link, withRouter} from 'react-router-dom';
 import RegistrationForm from './RegistrationForm';
 
@@ -78,7 +77,7 @@ class LoginForm extends Component {
     return (
         <div>
 
-          <div className="modal" style={modalStyle}>
+          <div className="modal">
             {this.props.children}
             <button className="close"
                     onClick={this.props.onClose}>
@@ -103,7 +102,6 @@ class LoginForm extends Component {
               <button type="submit">Sign In</button>
 
             </form>
-
 
           </div>
 
