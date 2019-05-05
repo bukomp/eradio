@@ -1,14 +1,13 @@
+import newFetch from 'axios';
+const url = 'http://lira.fi/school/webradio/back/main.php/';
 
-function downloadPlaylist() {
-  return fetch('http://lira.fi/school/webradio/back/playlist.php/download/').then(res => res.json());
-}
+export const downloadPlaylist = () => {
+  return newFetch.get(url+'download/');
+};
 
-function uploadPlaylist(data) {
+export const uploadPlaylist = (data) => {
+};
 
-}
-
-function songPlayed(){
-  return fetch('http://lira.fi/school/webradio/back/playlist.php/played/').then(res => res.json());
-}
-
-export {downloadPlaylist, songPlayed};
+export const songPlayed = () => {
+  return newFetch.get(url+'played/');
+};

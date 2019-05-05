@@ -1,0 +1,29 @@
+body{
+    background-color: whitesmoke;
+}
+
+.listFiles {
+    box-sizing: border-box;
+    border: 2px solid chartreuse;
+    float: left;
+    height: 100vh;
+    width: 50%;
+    position: relative;
+}
+
+.listSchedules {
+    box-sizing: border-box;
+    border: 5px double cornflowerblue;
+    float: right;
+    height: 100vh;
+    width: 50%;
+    position: relative;
+}
+
+.interface {
+display: inline;
+}
+
+.interface > div {
+    background-color: rgba(255,255,255,0.9);
+}
