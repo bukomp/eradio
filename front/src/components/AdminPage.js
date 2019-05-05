@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../css/back.css'
 import ListFiles from './AdminPage/ListFiles';
 import ListSchedules from './AdminPage/ListSchedules';
+import '../misc/radioApi'
+import {getFiles} from '../misc/radioApi';
 
 
-const AdminPage = (props) => {
+const AdminPage = () => {
+  const [files, setFiles] = useState({});
+  useEffect(() => {getFiles().then(response => setFiles(response.data))}, []);
   return (
-      <div id='interface'>
-        <ListFiles/>
-        <ListSchedules/>
+      <div>
+          <ListFiles files={files}/>
+          <ListSchedules/>
       </div>
-  )
+    );
 };
 
 export default AdminPage;

@@ -5,7 +5,7 @@ import LoginForm from './FrontPage/LoginForm/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
 
 const FrontPage = (props) => {
-  const [login, setLogin] = useState({isOpen: false, isOpenReg: false,});
+  const [login, setLogin] = useState({isOpen: false, isOpenReg: false});
 
   const toggleLogin = () => {
     setLogin({
@@ -23,8 +23,6 @@ const FrontPage = (props) => {
     window.localStorage.clear();
     setLogin({user: null})
   };
-
-/*  return (<div>front</div>);*/
     return (
         <React.Fragment>
           <AudioPlayer/>

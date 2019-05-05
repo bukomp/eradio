@@ -1,7 +1,8 @@
-import axios from 'axios';
+import newFetch from 'axios';
+const url = 'http://lira.fi/school/webradio/back/main.php/';
 
-const uploadFile = (data) => {
-  return fetch("http://lira.fi/school/webradio/back/main.php/upload/", {
+export const uploadFile = (data) => {
+  return fetch(url+'upload/', {
     method:"POST",
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -10,8 +11,8 @@ const uploadFile = (data) => {
   }).then(response => response.json())
 };
 
-const editFile = (id, data) => {
-  return fetch("http://lira.fi/school/webradio/back/main.php/edit/"+id, {
+export const editFile = (id, data) => {
+  return fetch(url+"edit/"+id, {
     method:"POST",
     headers: {
       'Content-Type': 'application/json'
@@ -20,13 +21,13 @@ const editFile = (id, data) => {
   }).then(response => response.json())
 };
 
-const deleteFile = (id) => {
-  return fetch("http://lira.fi/school/webradio/back/main.php/delete/"+id).then(response => response.json())
+export const deleteFile = (id) => {
+  return fetch(url+"delete/"+id).then(response => response.json())
 };
 
 
-const getAdmins = (id) => {
-  return fetch("http://lira.fi/school/webradio/back/main.php/login",{
+export const getAdmins = (id) => {
+  return fetch(url+"login",{
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -35,8 +36,6 @@ const getAdmins = (id) => {
   }).then(res => res.json())
 };
 
-const getFiles = () => {
-  return fetch("http://lira.fi/school/webradio/back/main.php/files")
-    .then(res => res.json())
+export const getFiles = () => {
+  return newFetch.get(url+'files');
 };
-export {getAdmins};
