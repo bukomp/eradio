@@ -41,7 +41,6 @@ class AudioPlayer extends Component {
     if(this.state !== undefined){
       for(let g of this.state.playlist){
         if(((g.time -(new Date().getTime() - g.duration))) < g.duration){
-
           this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
           return g.id;
         }
@@ -86,8 +85,8 @@ class AudioPlayer extends Component {
   webPlayer = () => {
     return (
       <React.Fragment>
-      <audio autoPlay ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
-      <Button onClick={this.switchButton}>button</Button>
+        <audio autoPlay ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
+        <Button onClick={this.switchButton}>button</Button>
       </React.Fragment>
     );
   };
