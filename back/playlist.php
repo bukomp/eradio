@@ -39,3 +39,5 @@ switch($uriSegments[5]){
         echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/playlist.php/"any from below here" <br><br>download<br>upload</h1>';
         break;
 }
+
+//(new Date().getTime())+" / "+(new Date().getTime()+118000)+" / "+(new Date().getTime()+6000+118000)
