@@ -4,9 +4,16 @@ body{
     background-color: #cccccc;
 }
 
-image{
-    margin-left: 10%;
+p{
+    font-size: 24px;
+    margin-left: 15px;
+    font-weight: bold;
 }
+
+image{
+    margin-left: 30%;
+}
+
 .modal {
     background-color: whitesmoke;
     border: black solid 5px;
@@ -28,22 +35,13 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 button{
-    background-color: lightslategrey;
-    color: white;
-    padding: 14px 20px;
-    margin: 25px 0 5px 60%;
-    border: black solid 3px;
-    cursor: pointer;
-    width: 150px;
-    border-radius: 8px;
-    font-family: monospace;
-    font-size: 22px;
+
 }
 
 .close{
     width: 60px;
     text-align: center;
-    margin-left: 335px;
+    margin-left: 80%;
     margin-top: 0;
 }
 
@@ -51,35 +49,36 @@ button{
     width: 100%;
     margin-left: 0;
     margin-top: 0;
+    font-weight: bold;
 }
 
-@media screen and (max-width: 600px) {
+.submit{
+    width: 35%;
+}
+
+@media screen and (max-width: 480px) {
     body {
         background-image: url("../img/vinyl.png");
     }
-    .form{
-        width: 30%;
-        height: 100vh;
-        margin-left: 0;
 
-    }
     button{
         padding: 10px 15px;
-        margin: 15px 0 5px 50%;
+        margin: 15px 0 5px 35%;
         cursor: pointer;
-        width: 45px;
+        width: 105px;
         font-size: 10px;
         text-align: center;
     }
 
     .close{
-        width: 60px;
+        width: 40px;
         text-align: center;
-        margin-left: 100px;
+        margin-left: 80%;
         margin-top: 0;
+        font-size: 10px;
     }
     input[type=text], input[type=password], input[type=email]{
-    width: 85%;
+    width: 80%;
     padding: 5px 10px;
     }
 

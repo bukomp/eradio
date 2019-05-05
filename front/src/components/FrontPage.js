@@ -3,6 +3,8 @@ import '../css/front.css';
 import RegistrationForm from './FrontPage/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
+import {Button} from '@material-ui/core';
+
 
 const FrontPage = (props) => {
   const [login, setLogin] = useState({isOpen: false, isOpenReg: false,});
@@ -29,11 +31,20 @@ const FrontPage = (props) => {
     return (
         <React.Fragment>
           <AudioPlayer/>
-          <button onClick={toggleLogin}>Login</button>
+          <Button variant={"contained"}
+                  style={{
+                    borderRadius: 35,
+                    backgroundColor: "lightslategrey",
+                    padding: "14px 20px",
+                    fontSize: "18px",
+                    width: "150px",
+                    margin: "25px 0 5px 60%"
+                  }}
+                  onClick={toggleLogin}>Login</Button>
           <LoginForm
               show={login.isOpen}
               onClose={toggleLogin}>
-          <button className="registration" onClick={toggleRegistration}>Be an active listener. Register here.</button>
+          <Button className="registration" onClick={toggleRegistration}>Be an active listener. Register here.</Button>
           </LoginForm>
 
           <RegistrationForm

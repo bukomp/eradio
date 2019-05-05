@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter} from 'react-router-dom';
-import RegistrationForm from './RegistrationForm';
+import {Button} from '@material-ui/core';
+
 
 class LoginForm extends Component {
   constructor() {
@@ -61,28 +62,19 @@ class LoginForm extends Component {
       return null;
     }
 
-    // The modal "window"
-    const modalStyle = {
-      backgroundColor: 'whitesmoke',
-      borderRadius: 5,
-      borderColor: 'black',
-      borderStyle: 'solid',
-      maxWidth: 400,
-      minHeight: 300,
-      marginLeft: 650,
-      marginTop: 0,
-      padding: 15,
-    };
-
     return (
-        <div>
 
           <div className="modal">
             {this.props.children}
-            <button className="close"
+            <Button variant={"contained"}
+                    style={{
+                      borderRadius: 35,
+                      margin: "0 0 30px 85%"
+                    }}
+                    className="close"
                     onClick={this.props.onClose}>
               X
-            </button>
+            </Button>
 
             <form onSubmit={this.handleSubmit}>
               <input
@@ -99,13 +91,22 @@ class LoginForm extends Component {
                   onChange={this.handlePasswordChange}
                   required
               />
-              <button type="submit">Sign In</button>
+              <Button variant={"contained"}
+                      style={{
+                        borderRadius: 35,
+                        backgroundColor: "lightslategrey",
+                        padding: "14px 20px",
+                        fontSize: "18px",
+                        width: "130px",
+                        margin: "25px 0 5px 55%"
+                      }}
+                      className="submit" type="submit">Sign In</Button>
 
             </form>
 
           </div>
 
-        </div>
+
 
     );
 

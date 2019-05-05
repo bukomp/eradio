@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button} from '@material-ui/core';
+
 
 class RegistrationForm extends Component {
   constructor() {
@@ -59,10 +61,17 @@ class RegistrationForm extends Component {
         <React.Fragment>
           <div className="modal">
             {this.props.children}
-            <button
+            <Button
+                variant={"contained"}
+                style={{
+                  borderRadius: 35,
+                  margin: "0 0 30px 85%"
+                }}
+                className="close"
                 onClick={this.props.onClose}>
               X
-            </button>
+            </Button>
+            <p>Like..listen..enjoy and register</p>
 
             <form onSubmit={this.handleSubmit}>
               <input
@@ -87,7 +96,15 @@ class RegistrationForm extends Component {
                   required
               />
 
-              <button>Save</button>
+              <Button variant={"contained"}
+                      style={{
+                        borderRadius: 35,
+                        backgroundColor: "lightslategrey",
+                        padding: "14px 20px",
+                        fontSize: "18px",
+                        width: "150px",
+                        margin: "25px 0 5px 60%"
+                      }}>Save</Button>
 
             </form>
 
