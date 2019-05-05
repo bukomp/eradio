@@ -1,9 +1,9 @@
 import React from 'react';
+const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListFile = ({file}) => {
-  console.log(file);
   return (
-      <div>{file.filename}</div>
+      <div>{file.filename} <a href={url+file.filename}>download</a></div>
   )
 };
 
