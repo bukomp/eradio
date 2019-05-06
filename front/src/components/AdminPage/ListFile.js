@@ -6,9 +6,17 @@ import Modal from 'react-modal';
 
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
+
 const ListFile = ({file}) => {
 
-  const [modal, setModal] = useState({modalIsOpen: false});
+  const customStyles={
+    content: {
+      top: '0',
+      right: '75%',
+    }
+  };
+
+const [modal, setModal] = useState({modalIsOpen: false});
 
 const openModal = () => {
   setModal({modalIsOpen:true});
@@ -29,13 +37,14 @@ const closeModal = () =>  {
         <Button variant="outlined" size="small" color="primary" onClick={openModal}>Play</Button>
         <Modal isOpen={modal.modalIsOpen}
                onRequestClose={closeModal}>
+          <Button onClick={closeModal} style={customStyles}>close</Button>
           <p>Id:{file.file_id}    </p>
-          <p>Filename:   {file.filename}    </p>
-          <p> Artist: </p>
-          <p> Title: </p>
-          <p>Duration in sec: </p>
+          <p> Artist: {JSON.parse(file.title).artist}  </p>
+          <p> Title:{JSON.parse(file.title).title} </p>
+          <p>Duration in sec: {JSON.parse(file.title).duration}</p>
 
-          <ReactAudioPlayer controls={true} src={url+file.filename}/></Modal>
+          <ReactAudioPlayer controls={true} src={url+file.filename}/>
+         </Modal>
 
       </div>
   )
