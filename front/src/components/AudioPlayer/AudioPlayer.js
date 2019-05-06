@@ -5,102 +5,110 @@ import {Button} from '@material-ui/core';
 class AudioPlayer extends Component {
   constructor(props) {
     super(props);
-    this.player = React.createRef();
     this.state = {
-      paused:false,
-      playlist:[],
-      webFrom:"http://media.mw.metropolia.fi/wbma/uploads/",
-      song:""
+      paused: false,
+      playlist: [],
+      webFrom: "http://media.mw.metropolia.fi/wbma/uploads/",
+      song: "",
+      playReady:false
     };
-
-  }
-
-  componentWillMount(){
-    downloadPlaylist().then(res => {
-      this.setState(this.sortTodayPlaylist(res));
-    })
+    this.player = React.createRef();
   }
 
   sortTodayPlaylist(playlist) {
-    //console.log(playlist);
+    console.log(playlist);
     const playlistTemp = this.state;
     playlistTemp.playReady = true;
-    for(let g of playlist.data){
+    for(let g of playlist.data.data){
       console.log(g);
       console.log(((g.time -(new Date().getTime() - g.duration))));
       if( ((g.time -(new Date().getTime() - g.duration)))>0 ){
         playlistTemp.playlist.push(g);
       }
     }
-    playlistTemp.song = playlistTemp.webFrom+this.playNow();
+
+    if(playlistTemp.playlist.length >= 1)playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].id;
     console.log(playlistTemp);
     return playlistTemp;
   }
-
-  playNow= () => {
-    const g = this.state.playlist[0];
-    if(this.state !== undefined && g !== undefined){
-      this.player.current.currentTime = (g.duration - ((g.time -(new Date().getTime() - g.duration))))/1000;
-      return g.id;
-    }
-  };
-
-  resume = () => {
-    this.setState({paused: false, muted: false});
-
-  };
-
-  pause = () => {
-    this.setState({paused: true, muted: true});
-  };
-
-  debugPlay = () => {
-    setTimeout(()=> {
-      setInterval(() => {
-        this.player.current.play();
-      }, 1000);
-    },1000);
-  };
-
-  switchButton = () => {
-    switch (this.state.paused){
-      case true:
-        this.resume();
-        break;
-      case false:
-        this.pause();
-        break;
-    }
-
-    console.log(this.state);
-  };
 
   audioEnd = () => {
     if(this.state.playlist[1] !== undefined) {
       const playlistTemp = this.state;
       playlistTemp.song = this.state.webFrom + this.state.playlist[1].id;
+      this.player.current.src=playlistTemp.song;
       playlistTemp.playlist.shift();
       console.log(playlistTemp);
       this.setState(playlistTemp);
     } else {
-      console.log("There is an error on Radio Station :(");
+      this.player.current.pause();
+      downloadPlaylist().then(res => {
+        this.setState(this.sortTodayPlaylist(res),()=>{
+          if(this.state.playlist[0] !== undefined) {
+            console.log(this.state.song);
+            this.audioLoad();
+            this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
+          } else {
+            this.emptyPlaylist();
+          }
+        });
+      });
     }
   };
 
-  webPlayer = () => {
-    return (
-      <React.Fragment>
-        <audio autoPlay onCanPlay={this.debugPlay} onPlaying={()=>{clearInterval(setInterval(()=>{this.player.current.play();}, 500))}} ref={this.player} muted={this.state.muted} onEnded={this.audioEnd} src={this.state.song}/>
+  audioLoad = () => {
+    const g = this.state.playlist[0];
+    this.player.current.src = this.state.song;
+    this.player.current.currentTime = (g.duration - ((g.time - (new Date().getTime() - g.duration)))) / 1000;
+  };
 
-        <Button variant={"contained"} onClick={this.switchButton}>button</Button>
+  audioPlay = () => {
+    if(!this.state.playReady){
+      downloadPlaylist().then(res => {
+        this.setState(this.sortTodayPlaylist(res),()=>{
+          if(this.state.playlist[0] !== undefined) {
+            console.log(this.state.song);
+            this.audioLoad();
+            this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
+          }
+        });
+      });
+    } else {
+      switch (this.state.paused) {
+        case true:
+          this.player.current.muted=false;
+          this.setState({paused:false});
+          break;
+        case false:
+          this.player.current.muted=true;
+          this.setState({paused:true});
+          break;
+      }
+    }
+  };
+
+  emptyPlaylist(){
+
+  }
+
+  readyPlayer = () => {
+    return(
+      <React.Fragment>
+        <audio
+          controls
+          ref={this.player}
+          onEnded={this.audioEnd}
+        />
+        <Button onClick={this.audioPlay}>Play</Button>
       </React.Fragment>
     );
   };
 
-  render(){
+  render() {
     return(
       <React.Fragment>
-        {this.webPlayer()}
+        {this.readyPlayer()
+        }
       </React.Fragment>
     );
   }
