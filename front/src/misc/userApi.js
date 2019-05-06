@@ -18,7 +18,7 @@ export const getFavouriteList = (token) => {
 };
 
 export const getFileInfo = (songId) => {
-  return newFetch.get(url+'/media/'+songId);
+  return newFetch.get(url+'media/'+songId);
 };
 
 /*axios.get('https://example.com/getSomething', {
