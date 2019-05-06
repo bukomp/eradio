@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListFile = ({file}) => {
-  console.log(file);
 
   const [modal, setModal] = useState({modalIsOpen: false});
 

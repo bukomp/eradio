@@ -1,5 +1,5 @@
 import newFetch from 'axios';
-const url = 'http://lira.fi/school/webradio/back/main.php/';
+const url = 'http://lira.fi/school/webradio/back/playlist.php/';
 
 export const downloadPlaylist = () => {
   return newFetch.get(url+'download/');

@@ -1,18 +1,11 @@
 import React from 'react';
-import ListFile from './ListFile';
+import {listEachFileInDB} from '../../misc/listEachFile';
 
 const ListFiles = ({files}) => {
-  //console.log(files);
-
-  const listEachFile = (inFiles) => {
-    return inFiles
-    .filter(file => file.media_type==="audio")
-    .map(file => <ListFile file={file} key={file.file_id}/>
-    )};
 
   return (
       <div className='listFiles'>
-        {files.length && listEachFile(files)}
+        {files.length && listEachFileInDB(files)}
       </div>
   )
 };
