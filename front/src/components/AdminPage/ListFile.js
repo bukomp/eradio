@@ -15,9 +15,9 @@ const ListFile = ({file}) => {
     }
   };
 
-const [modal, setModal] = useState({modalIsOpen: false});
-  const fileMeta = JSON.parse(file.title);
   const [modal, setModal] = useState({modalIsOpen: false});
+  const fileMeta = JSON.parse(file.title);
+
 
   const openModal = () => {
     setModal({modalIsOpen: true});
