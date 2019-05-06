@@ -31,6 +31,11 @@ const closeModal = () =>  {
         <Modal isOpen={modal.modalIsOpen}
                onRequestClose={closeModal}>
           <p>Id:{file.file_id}    </p>
+          <p>Filename:   {file.filename}    </p>
+          <p> Artist: </p>
+          <p> Title: </p>
+          <p>Duration in sec: </p>
+
           <ReactAudioPlayer controls={true} src={url+file.filename}/></Modal>
 
       </div>
