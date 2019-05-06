@@ -18,7 +18,6 @@ class AudioPlayer extends Component {
   sortTodayPlaylist(playlist) {
     console.log(playlist);
     const playlistTemp = this.state;
-    playlistTemp.playReady = true;
     for(let g of playlist.data.data){
       console.log(g);
       console.log(((g.time -(new Date().getTime() - g.duration))));
@@ -26,8 +25,7 @@ class AudioPlayer extends Component {
         playlistTemp.playlist.push(g);
       }
     }
-
-    if(playlistTemp.playlist.length >= 1)playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].id;
+    if(playlistTemp.playlist.length > 0){playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].id;playlistTemp.playReady = true;}
     console.log(playlistTemp);
     return playlistTemp;
   }
