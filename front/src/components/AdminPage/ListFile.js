@@ -4,7 +4,6 @@ import ReactAudioPlayer from 'react-audio-player';
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListFile = ({file}) => {
-  console.log(file);
 
   const editButton = (id) => {
     //TODO: add modal window to edit file's meta

@@ -1,10 +1,12 @@
 import React from 'react';
+import {listEachFileInPlaylist} from '../../misc/listEachFile';
 
 
-const ListSchedules = () => {
+const ListSchedules = ({files}) => {
+
   return (
       <div className='listSchedules'>
-        List of Schedules goes here
+        {files.length && listEachFileInPlaylist(files)}
       </div>
   )
 };

@@ -1,28 +1,37 @@
-function addFavourite(token, songId) {
-  return fetch("http://media.mw.metropolia.fi/wbma/favourites",{
-    method:"POST",
-    headers:{
-      'x-access-token':token,
-    },
-    body: JSON.stringify({"file_id":songId})
-  }).then(res => res.json())
-}
+import newFetch from 'axios';
+const url = 'http://media.mw.metropolia.fi/wbma/';
 
-function removeFavourite(token, songId) {
-  return fetch("http://media.mw.metropolia.fi/wbma/favourites/file/"+songId,{
-    method:"DELETE",
-    headers:{
-      'x-access-token':token,
-    },
-    body: JSON.stringify({"file_id":songId})
-  }).then(res => res.json())
-}
+export const addFavourite = (token, songId) => {
+  const body = {'file_id':songId};
+  const headers = {headers: {'x-access-token': token}};
+  return newFetch.post(url+'favourites', body, headers);
+};
 
-function getFavouriteList(token) {
-  return fetch("http://media.mw.metropolia.fi/wbma/favourites",{
-    method:"GET",
-    headers:{
-      'x-access-token':token,
-    }
-  }).then(res => res.json())
-}
+export const removeFavourite = (token, songId) => {
+  const headers = {headers:{'x-access-token':token}};
+  return newFetch.delete(url+'favourites/file/'+songId,headers);
+};
+
+export const getFavouriteList = (token) => {
+  const headers = {headers: {'x-access-token': token}};
+  return newFetch.get(url+'favourites', headers);
+};
+
+export const getFileInfo = (songId) => {
+  return newFetch.get(url+'/media/'+songId);
+};
+
+/*axios.get('https://example.com/getSomething', {
+  headers: {
+    Authorization: 'Bearer ' + token //the token is a variable which holds the token
+  }
+})*/
+
+/*
+axios.post('https://example.com/postSomething', {
+      email: varEmail, //varEmail is a variable which holds the email
+      password: varPassword
+    },
+    {
+      headers: {Authorization: 'Bearer ' + varToken}
+    })*/
