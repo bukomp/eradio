@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from '@material-ui/core';
+import {Button, Input, FormGroup} from '@material-ui/core';
 
 
 class RegistrationForm extends Component {
@@ -73,22 +73,22 @@ class RegistrationForm extends Component {
             </Button>
             <p>Like..listen..enjoy and register</p>
 
-            <form onSubmit={this.handleSubmit}>
-              <input
+            <FormGroup onSubmit={this.handleSubmit}>
+              <Input
                   type="text"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
                   required
               />
-              <input
+              <Input
                   type="password"
                   placeholder="Password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
                   required
               />
-              <input
+              <Input
                   type="email"
                   placeholder="Email"
                   value={this.state.email}
@@ -103,10 +103,10 @@ class RegistrationForm extends Component {
                         padding: "14px 20px",
                         fontSize: "18px",
                         width: "150px",
-                        margin: "25px 0 5px 60%"
+                        margin: "15px 0 0 60%"
                       }}>Save</Button>
 
-            </form>
+            </FormGroup>
 
           </div>
 

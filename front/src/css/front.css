@@ -5,44 +5,21 @@ body{
 }
 
 p{
-    font-size: 24px;
+    font-size: 25px;
+    margin-top: 0;
     margin-left: 15px;
     font-weight: bold;
 }
 
-image{
-    margin-left: 30%;
-}
 
 .modal {
     background-color: whitesmoke;
     border: black solid 5px;
-    width: 40%;
-    height: 40%;
-    margin-left: 50%;
+    width: 25%;
+    height: 330px;
+    margin-left: 60%;
     margin-top: 0;
     padding: 15px;
-}
-
-input[type=text], input[type=password], input[type=email] {
-    width: 95%;
-    padding: 12px 20px;
-    margin: 8px 55px 5px 15px;
-    border: 2px solid black;
-    box-sizing: border-box;
-    font-family: monospace;
-
-}
-
-button{
-
-}
-
-.close{
-    width: 60px;
-    text-align: center;
-    margin-left: 80%;
-    margin-top: 0;
 }
 
 .registration{
@@ -52,40 +29,15 @@ button{
     font-weight: bold;
 }
 
-.submit{
-    width: 35%;
-}
-
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 600px) and (max-width: 1000px) {
     body {
         background-image: url("../img/vinyl.png");
     }
 
-    button{
-        padding: 10px 15px;
-        margin: 15px 0 5px 35%;
-        cursor: pointer;
-        width: 105px;
-        font-size: 10px;
-        text-align: center;
-    }
-
-    .close{
-        width: 40px;
-        text-align: center;
-        margin-left: 80%;
-        margin-top: 0;
-        font-size: 10px;
-    }
-    input[type=text], input[type=password], input[type=email]{
-    width: 80%;
-    padding: 5px 10px;
-    }
-
     .modal{
-        width: 200px;
-        height: 300px;
-        margin-left: 10%;
+        width: 270px;
+        height: 330px;
+        margin-left: 50%;
         margin-top: 0;
         padding: 15px;
 

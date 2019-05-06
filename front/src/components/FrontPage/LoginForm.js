@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component, useState} from 'react';
 import { Link, withRouter} from 'react-router-dom';
-import {Button} from '@material-ui/core';
+import {Button, Input, FormGroup, TextField} from '@material-ui/core';
+
 
 
 class LoginForm extends Component {
@@ -66,43 +67,37 @@ class LoginForm extends Component {
 
           <div className="modal">
             {this.props.children}
-            <Button variant={"contained"}
-                    style={{
-                      borderRadius: 35,
-                      margin: "0 0 30px 85%"
-                    }}
-                    className="close"
-                    onClick={this.props.onClose}>
-              X
-            </Button>
 
-            <form onSubmit={this.handleSubmit}>
-              <input
+
+            <FormGroup onSubmit={this.handleSubmit}>
+              <TextField
                   type="text"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
                   required
               />
-              <input
+              <TextField
                   type="password"
                   placeholder="Password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
                   required
               />
-              <Button variant={"contained"}
+
+              <Button  variant={"contained"}
                       style={{
                         borderRadius: 35,
                         backgroundColor: "lightslategrey",
-                        padding: "14px 20px",
+                        padding: "15px 20px",
                         fontSize: "18px",
                         width: "130px",
-                        margin: "25px 0 5px 55%"
+                        margin: "45px 0 5px 55%"
                       }}
-                      className="submit" type="submit">Sign In</Button>
+                      className={"submit"}>Sign In</Button>
 
-            </form>
+
+            </FormGroup>
 
           </div>
 
