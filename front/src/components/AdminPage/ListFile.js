@@ -7,24 +7,25 @@ import Modal from 'react-modal';
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListFile = ({file}) => {
-
+  const fileMeta = JSON.parse(file.title);
   const [modal, setModal] = useState({modalIsOpen: false});
 
-const openModal = () => {
-  setModal({modalIsOpen:true});
+  const openModal = () => {
+    setModal({modalIsOpen: true});
   };
 
-const closeModal = () =>  {
-  setModal({modalIsOpen:false});
-};
+  const closeModal = () => {
+    setModal({modalIsOpen: false});
+  };
 
   const playButton = (id) => {
     console.log(id);
   };
 
+
   return (
       <div className='eachSong'>
-        {file.filename} <a href={url+file.filename}>download</a>
+        {fileMeta.title} - {fileMeta.artist} <a href={url+file.filename}>download</a>
 
         <Button variant="outlined" size="small" color="primary" onClick={openModal}>Play</Button>
         <Modal isOpen={modal.modalIsOpen}
