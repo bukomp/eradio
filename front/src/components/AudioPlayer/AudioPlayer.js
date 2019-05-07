@@ -38,7 +38,7 @@ class AudioPlayer extends Component {
       playlistTemp.playlist.shift();
       console.log(playlistTemp);
       this.setState(playlistTemp);
-    } else {
+    } else {/*
       this.player.current.pause();
       downloadPlaylist().then(res => {
         this.setState(this.sortTodayPlaylist(res),()=>{
@@ -50,7 +50,8 @@ class AudioPlayer extends Component {
             this.emptyPlaylist();
           }
         });
-      });
+      });*/
+      this.emptyPlaylist();
     }
   };
 
