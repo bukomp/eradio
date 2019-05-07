@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Button, Input, FormGroup} from '@material-ui/core';
-
+import {Button, Input, FormGroup, TextField, InputLabel, InputAdornment} from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
 
 class RegistrationForm extends Component {
   constructor() {
@@ -9,6 +11,7 @@ class RegistrationForm extends Component {
       username: '',
       password: '',
       email: '',
+      showPassword: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,6 +33,10 @@ class RegistrationForm extends Component {
     console.log('email was changed', event.target.value);
     this.setState({email: event.target.value});
   }
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -58,60 +65,92 @@ class RegistrationForm extends Component {
 
 
     return (
-        <React.Fragment>
+
+        <form onSubmit={this.handleSubmit}>
           <div className="modal">
             {this.props.children}
-            <Button
-                variant={"contained"}
-                style={{
-                  borderRadius: 35,
-                  margin: "0 0 30px 85%"
-                }}
-                className="close"
-                onClick={this.props.onClose}>
-              X
-            </Button>
+
             <p>Like..listen..enjoy and register</p>
 
-            <FormGroup onSubmit={this.handleSubmit}>
-              <Input
+              <TextField
+                  variant="outlined"
+                  label="Username"
                   type="text"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
-                  required
+                  style={{
+                    marginTop: "15px",
+                    marginLeft: "5px",
+                    width: "97%"
+
+                  }}
               />
-              <Input
-                  type="password"
-                  placeholder="Password"
+              <TextField
+                  variant="outlined"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  label="Password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
-                  required
-              />
-              <Input
-                  type="email"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.handleEmailChange}
-                  required
+                  style={{
+                    marginTop: "15px",
+                    marginLeft: "5px",
+                    width: "97%"
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                              aria-label="Toggle password visibility"
+                              onClick={this.handleClickShowPassword}
+                          >
+                            {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                    ),
+                  }}
               />
 
-              <Button variant={"contained"}
+
+              <TextField
+                  type="email"
+                  variant="outlined"
+                  label="Email"
+                  value={this.state.email}
+                  onChange={this.handleEmailChange}
+                  style={{
+                    marginTop: "15px",
+                    marginLeft: "5px",
+                    width: "97%"
+                  }}
+              />
+<hr/>
+              <Button type={"submit"} variant={"contained"}
                       style={{
                         borderRadius: 35,
                         backgroundColor: "lightslategrey",
                         padding: "14px 20px",
-                        fontSize: "18px",
-                        width: "150px",
-                        margin: "15px 0 0 60%"
+                        fontSize: "20px",
+                        width: "125px",
+                        margin: "25px 0 0 62%"
                       }}>Save</Button>
 
-            </FormGroup>
+            <Button
+                variant={"contained"}
+                style={{
+                  borderRadius: "35px",
+                  margin: "-90px 0 0 0",
+                  width: "125px",
+                  padding: "15px 20px",
+                  fontSize: "20px",
+                }}
+                className="close"
+                onClick={this.props.onClose}>
+              Close
+            </Button>
 
           </div>
-
-        </React.Fragment>
-
+  </form>
     );
   }
 }

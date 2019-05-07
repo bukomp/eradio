@@ -38,7 +38,7 @@ const FrontPage = (props) => {
                     padding: "14px 20px",
                     fontSize: "18px",
                     width: "150px",
-                    margin: "25px 0 15px 60%"
+                    margin: "25px 0 15px 75%"
                   }}
                   onClick={toggleLogin}>Login</Button>
 
@@ -47,7 +47,7 @@ const FrontPage = (props) => {
               onClose={toggleLogin}>
 
           <Button style={{
-            margin: "15px 0 25px 0",
+            margin: "25px 0 25px 0",
             fontSize: "25px",
           }} onClick={toggleRegistration}>Be an active listener. Register here.</Button>
           </LoginForm>

@@ -1,7 +1,9 @@
 import React, {Component, useState} from 'react';
 import { Link, withRouter} from 'react-router-dom';
-import {Button, Input, FormGroup, TextField} from '@material-ui/core';
-
+import {Button, Input, FormControl, TextField, Grid, InputLabel, InputAdornment} from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
 
 
 class LoginForm extends Component {
@@ -10,6 +12,7 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
+      showPassword: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -25,6 +28,10 @@ class LoginForm extends Component {
     this.setState({password: event.target.value});
   }
 
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -34,6 +41,7 @@ class LoginForm extends Component {
       password: this.state.password,
       email: this.state.email,
     };
+
     console.log('Login is successful.', data);
     fetch(url, {
       method: 'POST',
@@ -54,7 +62,6 @@ class LoginForm extends Component {
     } else {
       console.log('error');
     }
-
   };
 
   render() {
@@ -64,48 +71,80 @@ class LoginForm extends Component {
     }
 
     return (
+        <form onSubmit={this.handleSubmit}>
 
           <div className="modal">
             {this.props.children}
-
-
-            <FormGroup onSubmit={this.handleSubmit}>
               <TextField
+                  variant="outlined"
                   type="text"
-                  placeholder="Username"
+                  label="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
-                  required
+                  style={{
+                    marginTop: 15,
+                    marginLeft: 5,
+                    width: "100%",
+                  }}
               />
+
               <TextField
-                  type="password"
-                  placeholder="Password"
+                  variant="outlined"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  label="Password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
-                  required
+                  style={{
+                    marginTop: "15px",
+                    marginLeft: "5px",
+                    width: "100%",
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                              aria-label="Toggle password visibility"
+                              onClick={this.handleClickShowPassword}
+                          >
+                            {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                    ),
+                  }}
               />
-
-              <Button  variant={"contained"}
+            <hr/>
+              <Button type={"submit"} variant={"contained"}
                       style={{
-                        borderRadius: 35,
+                        borderRadius: "35px",
                         backgroundColor: "lightslategrey",
                         padding: "15px 20px",
-                        fontSize: "18px",
-                        width: "130px",
-                        margin: "45px 0 5px 55%"
+                        fontSize: "20px",
+                        width: "125px",
+                        margin: "25px 0 5px 62%"
                       }}
-                      className={"submit"}>Sign In</Button>
+                      >Sign In</Button>
 
+            <Button variant={"contained"}
+                    style={{
+                      borderRadius: "35px",
+                      margin: "-105px 0 0 0",
+                      width: "125px",
+                      padding: "15px 15px",
+                      fontSize: "20px",
+                    }}
+                    className="close"
+                    onClick={this.props.onClose}>
+              Close
+            </Button>
 
-            </FormGroup>
 
           </div>
-
-
+          </form>
 
     );
 
   }
 }
+
 
 export default withRouter(LoginForm);
