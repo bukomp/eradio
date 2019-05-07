@@ -39,3 +39,43 @@ export const getAdmins = (id) => {
 export const getFiles = () => {
   return newFetch.get(url+'files');
 };
+
+export const fileCreateRealTime = () => {
+  function getDuration(src) {
+    return new Promise(function(resolve) {
+      const audio = new Audio();
+      audio.onloadedmetadata = () => {resolve(audio.duration*1000)};
+      audio.src = src;
+    });
+  }
+
+  fetch("http://media.mw.metropolia.fi/wbma/media/user/1103").then(resp => resp.json()).then(resp => {
+    for(let g of resp){
+      if(g.media_type === "audio")getDuration("http://media.mw.metropolia.fi/wbma/uploads/"+g.filename).then(res => {
+        const title = JSON.parse(g.title);
+        title.duration = Math.floor(res);
+        const titleU = JSON.stringify(title);
+        fetch("http://media.mw.metropolia.fi/wbma/media/"+g.file_id, {
+          method:"PUT",
+          headers: {      'Content-Type': 'application/json',
+            'x-access-token':""
+          },
+          body:JSON.stringify({"title":titleU})
+        }).then(res => res.json())
+          .then(res => {console.log(res);})
+          .catch(err => console.log(err));
+        //console.log(JSON.stringify({"title":titleU}));
+      })
+    }
+
+  });
+};
+
+
+
+
+
+
+
+
+
