@@ -5,12 +5,15 @@ import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
 import {Button} from '@material-ui/core';
 import MdHeart from 'react-ionicons/lib/MdHeart'
+import Modal from 'react-modal';
+import ListFile from './AdminPage/ListFile'
 
 
 
 
 const FrontPage = (props) => {
   const [login, setLogin] = useState({isOpen: false, isOpenReg: false, loggedIn:false});
+
 
   const toggleLogin = () => {
     setLogin({
@@ -38,11 +41,14 @@ const FrontPage = (props) => {
     setLogin({user: null})
   };
 
+  const likedSong = () => {
+
+  }
 
 
     return (
         <React.Fragment>
-          <AudioPlayer/>
+
           {!login.loggedIn &&
           <Button variant={"contained"}
                   style={{
@@ -65,8 +71,18 @@ const FrontPage = (props) => {
                     padding: "14px 20px",
                     fontSize: "18px",
                     width: "150px",
-                    margin: "25px 0 15px 75%"
+                    marginLeft: "85%",
+                    marginTop: "5px"
                   }}onClick={logout}>Logout</Button>
+          }
+
+          {login.loggedIn &&
+          <div className="preference">
+            <h2>Please check your preferences here</h2>
+            <ul>
+              <li><p></p></li>
+            </ul>
+          </div>
           }
           <LoginForm
               show={login.isOpen}
@@ -85,22 +101,28 @@ const FrontPage = (props) => {
               show={login.isOpenReg}
               onClose={toggleRegistration}>
           </RegistrationForm>
-          {login.loggedIn &&
 
+          <AudioPlayer/>
+
+          {login.loggedIn &&
             <div>
-              <Button style={{
+              <Button onclick={likedSong} style={{
                 borderRadius: "50%",
                 width: "80px",
-                height: "70px"
-              }}><MdHeart fontSize="60px" color="red"
+                height: "70px",
+                position: "absolute",
+                marginLeft: "298px",
+                marginTop: 0
+              }}><MdHeart fontSize="80px" color="red"
                           beat={true}/>
               </Button>
 
-              <p style={{fontSize: "15px"}}> Did you like this song? Press like
+              <br/><p style={{fontSize: "22px", marginLeft: "3%"}}> <br/>Press like
                 to impact on radio content and save song information in your
                 profile</p>
             </div>
           }
+
 
         </React.Fragment>
 

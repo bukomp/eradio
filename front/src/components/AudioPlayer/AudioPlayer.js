@@ -102,7 +102,7 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "640px", position: "relative", margin: "auto"}}>
+        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "640px", position: "relative", marginLeft: "5%"}}>
           <Button style={{
           borderRadius: "50%",
           width: "55px",

@@ -13,7 +13,7 @@ hr {
 
 p{
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-left: 5px;
     font-weight: bold;
 }
@@ -25,8 +25,27 @@ p{
     width: 350px;
     height: 435px;
     margin-left: 65%;
-    margin-top: 0;
+    margin-top: 6%;
     padding: 15px;
+    position: absolute;
+}
+
+h2{
+    text-align: center;
+    text-decoration-line:underline;
+}
+
+.preference{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border-style: double;
+    width: 30%;
+    height: 400px;
+    margin-left: 50%;
+
+    position: absolute;
+    overflow: auto;
+
 }
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
@@ -39,4 +58,5 @@ p{
         padding: 15px;
 
     }
+    
 }
