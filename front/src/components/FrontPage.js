@@ -78,7 +78,7 @@ const FrontPage = (props) => {
 
         <div>
 
-            <Button><MdHeart fontSize="60px" color="red"
+            <Button style={{borderRadius: "50%", width: "80px", height: "70px"}}><MdHeart fontSize="60px" color="red"
                                         beat={true}/>
             </Button>
 

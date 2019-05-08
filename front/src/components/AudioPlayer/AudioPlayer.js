@@ -101,7 +101,7 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <Button style={{borderRadius: "50%", width: "50px", height: "50px"}} onClick={this.audioPlay}><MdPlay/></Button>
+        <Button style={{borderRadius: "50%", width: "80px", height: "70px"}} onClick={this.audioPlay}><MdPlay fontSize="50px"/></Button>
       </React.Fragment>
     );
   };
