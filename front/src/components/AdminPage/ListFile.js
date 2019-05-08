@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
 import ReactAudioPlayer from 'react-audio-player';
-import LoginForm from '../FrontPage/LoginForm';
 import Modal from 'react-modal';
 
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';

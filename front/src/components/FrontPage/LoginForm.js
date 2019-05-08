@@ -1,22 +1,43 @@
 import React, {Component, useState} from 'react';
-import { Link, withRouter} from 'react-router-dom';
-import {Button, Input, FormControl, TextField, Grid, InputLabel, InputAdornment} from '@material-ui/core';
+import {withRouter} from 'react-router-dom';
+import {Button, TextField, InputAdornment} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 
 
 class LoginForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      loggedIn: false,
       username: '',
       password: '',
       showPassword: false,
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
+
+  componentDidMount(){
+    if(window.localStorage.getItem('token') !== "null" && window.localStorage.getItem('token') !== null && window.localStorage.getItem('token') !== undefined && window.localStorage.getItem('token') !==  "undefined"){
+      console.log(window.localStorage.getItem('token'));
+      fetch('http://media.mw.metropolia.fi/wbma/users/user',{
+        headers:{
+          'x-access-token':window.localStorage.getItem('token')
+        }
+      })
+          .then(resp => resp.json())
+          .then(resp => {
+        console.log(resp);
+        this.setState({username:resp.username, password:resp.password});
+        this.props.signIn();
+
+      }).catch(err => {console.log(err)})
+    }
+  }
+
 
   handleChange(event) {
     console.log('user was changed', event.value);
@@ -33,13 +54,12 @@ class LoginForm extends Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    if(event !== undefined)event.preventDefault();
 
     const url = 'http://media.mw.metropolia.fi/wbma/login';
     const data = {
       username: this.state.username,
       password: this.state.password,
-      email: this.state.email,
     };
 
     console.log('Login is successful.', data);
@@ -54,6 +74,7 @@ class LoginForm extends Component {
           console.log('Success', response);
           window.localStorage.setItem('token', response.token);
           console.log(window.localStorage.getItem('token'));
+          this.setState({loggedIn:true});
         });
 
     if (localStorage.user !== 'undefined') {
