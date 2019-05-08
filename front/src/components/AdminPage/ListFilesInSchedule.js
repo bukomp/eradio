@@ -17,6 +17,9 @@ const customStyles = {
 };
 
 const ListFilesInSchedule = ({file}) => {
+  const fileHour = new Date(file.time).getHours();
+  const fileMinutes = new Date(file.time).getMinutes();
+
   const [modal, setModal] = useState({modalIsOpen: false});
 
   const openModal = () => {
@@ -27,10 +30,9 @@ const ListFilesInSchedule = ({file}) => {
     setModal({modalIsOpen: false});
   };
 
-  console.log(file);
   return (
       <div className='eachSong'>
-        {file.title} - {file.artist} {new Date(file.time).toISOString()} <a href={url+file.filename}>download</a>
+        <strong>{fileHour}:{fileMinutes}</strong> {file.title} - {file.artist} <a href={url+file.filename}>download</a>
         <Button variant="outlined" size="small" color="primary" onClick={openModal}>Play</Button>
         <Modal isOpen={modal.modalIsOpen} style={customStyles}>
           <Button onClick={closeModal} style={{marginLeft: 600}}>close</Button>
