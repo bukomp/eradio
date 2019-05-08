@@ -1,8 +1,8 @@
 body{
-    background-image: url("../img/vinyl.png");
-    background-repeat: no-repeat;
     background-color: #cccccc;
 }
+
+
 hr {
     border-top: 2px solid lightslategrey;
     border-radius: 5px;
@@ -30,9 +30,6 @@ p{
 }
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
-    body {
-        background-image: url("../img/vinyl.png");
-    }
 
     .modal{
         width: 310px;

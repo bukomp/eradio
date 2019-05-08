@@ -51,12 +51,22 @@ const FrontPage = (props) => {
                     padding: "14px 20px",
                     fontSize: "18px",
                     width: "150px",
-                    margin: "25px 0 15px 75%"
+                    margin: "25px 0 15px 75%",
+                    zIndex: "999",
+                    position: "absolute"
                   }}
                   onClick={toggleLogin}>Login</Button>
           }
           {login.loggedIn &&
-          <Button variant={"contained"} onClick={logout}>Logout</Button>
+          <Button variant={"contained"}
+                  style={{
+                    borderRadius: 35,
+                    backgroundColor: "lightslategrey",
+                    padding: "14px 20px",
+                    fontSize: "18px",
+                    width: "150px",
+                    margin: "25px 0 15px 75%"
+                  }}onClick={logout}>Logout</Button>
           }
           <LoginForm
               show={login.isOpen}

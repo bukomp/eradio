@@ -67,7 +67,6 @@ class RegistrationForm extends Component {
     }
     const { checked } = this.state;
 
-
     return (
 
         <form onSubmit={this.handleSubmit}>
@@ -87,7 +86,6 @@ class RegistrationForm extends Component {
                     marginTop: "15px",
                     marginLeft: "5px",
                     width: "97%"
-
                   }}
               />
               <TextField

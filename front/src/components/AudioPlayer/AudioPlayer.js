@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {downloadPlaylist} from '../../misc/playlistApi';
 import {Button} from '@material-ui/core';
-import MdPlay from 'react-ionicons/lib/MdPlay'
+import MdPlay from 'react-ionicons/lib/MdPlay';
+import vinyl from '../../img/vinyl.png';
+import '../../css/front.css';
 
 class AudioPlayer extends Component {
   constructor(props) {
@@ -100,7 +102,15 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <Button style={{borderRadius: "50%", width: "80px", height: "70px"}} onClick={this.audioPlay}><MdPlay fontSize="50px"/></Button>
+        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "640px", position: "relative", margin: "auto"}}>
+          <Button style={{
+          borderRadius: "50%",
+          width: "55px",
+          height: "60px",
+          top: "44%",
+          left: "36%",
+          position: "absolute",
+        }} onClick={this.audioPlay}><MdPlay fontSize="50px"/></Button></div>
       </React.Fragment>
     );
   };
