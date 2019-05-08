@@ -75,17 +75,22 @@ const FrontPage = (props) => {
               show={login.isOpenReg}
               onClose={toggleRegistration}>
           </RegistrationForm>
+          {login.loggedIn &&
 
-        <div>
+            <div>
+              <Button style={{
+                borderRadius: "50%",
+                width: "80px",
+                height: "70px"
+              }}><MdHeart fontSize="60px" color="red"
+                          beat={true}/>
+              </Button>
 
-            <Button style={{borderRadius: "50%", width: "80px", height: "70px"}}><MdHeart fontSize="60px" color="red"
-                                        beat={true}/>
-            </Button>
-
-
-          <p style={{fontSize: "15px"}}> Did you like this song? Press like to impact on radio content and save song information in your profile</p>
-        </div>
-
+              <p style={{fontSize: "15px"}}> Did you like this song? Press like
+                to impact on radio content and save song information in your
+                profile</p>
+            </div>
+          }
 
         </React.Fragment>
 
