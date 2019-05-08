@@ -1,15 +1,16 @@
 import React from 'react';
-import {listEachFileInPlaylist} from '../../misc/listEachFile';
-import {getFileInfo} from '../../misc/userApi';
+import ListFilesInSchedule from './ListFilesInSchedule';
 
 
 
 const ListSchedules = ({files}) => {
-  const x= getFileInfo(1988).then(e =>console.log(JSON.parse(e.data.title).title));
+  const listEachFileInPlaylist = (inFiles) => {
+    return inFiles
+    .map(file => <ListFilesInSchedule file={file} key={file.id}/>);}
 
   return (
       <div className='listSchedules'>
-        {files.length && listEachFileInPlaylist(files)}
+        {typeof (files.data) ==='object' && listEachFileInPlaylist(files.data)}
       </div>
   )
 };

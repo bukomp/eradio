@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
-import ReactAudioPlayer from 'react-audio-player';
 import Modal from 'react-modal';
+import ReactAudioPlayer from 'react-audio-player';
 
 const url ='http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -16,11 +16,8 @@ const customStyles = {
   }
 };
 
-const ListFile = ({file}) => {
-
+const ListFilesInSchedule = ({file}) => {
   const [modal, setModal] = useState({modalIsOpen: false});
-  const fileMeta = JSON.parse(file.title);
-
 
   const openModal = () => {
     setModal({modalIsOpen: true});
@@ -30,28 +27,33 @@ const ListFile = ({file}) => {
     setModal({modalIsOpen: false});
   };
 
-  const playButton = (id) => {
-    console.log(id);
-  };
-
-
+  console.log(file);
   return (
       <div className='eachSong'>
-        {fileMeta.title} - {fileMeta.artist} <a href={url+file.filename}>download</a>
-
+        {file.title} - {file.artist} {new Date(file.time).toISOString()} <a href={url+file.filename}>download</a>
         <Button variant="outlined" size="small" color="primary" onClick={openModal}>Play</Button>
         <Modal isOpen={modal.modalIsOpen} style={customStyles}>
           <Button onClick={closeModal} style={{marginLeft: 600}}>close</Button>
-          <p>Id: {file.file_id}    </p>
-          <p>Artist: {JSON.parse(file.title).artist}  </p>
-          <p>Title: {JSON.parse(file.title).title} </p>
-          <p>Duration in sec: {JSON.parse(file.title).duration/1000}</p>
+          <p>Id: {file.id}    </p>
+          <p>Artist: {file.artist}  </p>
+          <p>Title: {file.title} </p>
+          <p>Duration in sec: {file.duration/1000}</p>
 
           <ReactAudioPlayer controls={true} src={url+file.filename}/>
-         </Modal>
+        </Modal>
 
       </div>
   )
 };
 
-export default ListFile;
+export default ListFilesInSchedule;
+
+
+/*
+artist: "Sting"
+duration: 118230
+filename: "5425508c187ffad52be2758eeff75431.mp3"
+id: 1982
+time: 1557313449894
+title: "Yes"
+*/
