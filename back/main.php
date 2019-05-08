@@ -107,16 +107,14 @@ function getFiles($uri){
     return $result;
 }
 
-$adminData = [
-    "username" => "webradio",
-    "password" => "webRadio2019!"
-];
+$allAdmin = fopen("allAdmin","r");
+$allAdminData = fread($allAdmin, filesize("allAdmin"));
 
-$myJSON = json_encode($adminData);
+fclose($allAdmin);
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_URL, $uri."/login");
-curl_setopt($ch, CURLOPT_POSTFIELDS, $myJSON);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $allAdminData);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Access-Control-Allow-Origin:*',

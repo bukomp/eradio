@@ -1,13 +1,34 @@
 <?php
+
+
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
+
 function download(){
     $playlistFile = fopen("playlist.json","r");
     $playlist = fread($playlistFile, filesize("playlist.json"));
-    //$playlist = json_encode($playlist);
+    $playlist = json_decode($playlist,true);
     fclose($playlistFile);
+    $tempArr = ["data" => []];
 
-    return $playlist;
+    foreach ($playlist["data"] as $g){
+        $uri = "http://media.mw.metropolia.fi/wbma";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $uri."/media/".$g["id"]);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec ($ch);
+        curl_close ($ch);
+        $result = json_decode($result, true);
+        $metaData = json_decode($result["title"], true);
+        $g["filename"] = $result["filename"];
+        $g["title"] = $metaData["title"];
+        $g["artist"] = $metaData["artist"];
+        $g["duration"] = $metaData["duration"];
+        array_push($tempArr["data"], $g);
+    }
+    $tempArr = json_encode($tempArr);
+    return $tempArr;
 }
 
 function played(){
@@ -32,9 +53,6 @@ switch($uriSegments[5]){
     case "download":
         echo download();
         break;
-    /*case "played":
-        echo played();
-        break;*/
     default:
         echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/playlist.php/"any from below here" <br><br>download<br>upload</h1>';
         break;

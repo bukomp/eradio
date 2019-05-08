@@ -25,7 +25,7 @@ class AudioPlayer extends Component {
         playlistTemp.playlist.push(g);
       }
     }
-    if(playlistTemp.playlist.length > 0){playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].id;playlistTemp.playReady = true;}
+    if(playlistTemp.playlist.length > 0){playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].filename;playlistTemp.playReady = true;}
     console.log(playlistTemp);
     return playlistTemp;
   }
@@ -33,12 +33,12 @@ class AudioPlayer extends Component {
   audioEnd = () => {
     if(this.state.playlist[1] !== undefined) {
       const playlistTemp = this.state;
-      playlistTemp.song = this.state.webFrom + this.state.playlist[1].id;
+      playlistTemp.song = this.state.webFrom + this.state.playlist[1].filename;
       this.player.current.src=playlistTemp.song;
       playlistTemp.playlist.shift();
       console.log(playlistTemp);
       this.setState(playlistTemp);
-    } else {
+    } else {/*
       this.player.current.pause();
       downloadPlaylist().then(res => {
         this.setState(this.sortTodayPlaylist(res),()=>{
@@ -50,7 +50,8 @@ class AudioPlayer extends Component {
             this.emptyPlaylist();
           }
         });
-      });
+      });*/
+      this.emptyPlaylist();
     }
   };
 
@@ -68,6 +69,8 @@ class AudioPlayer extends Component {
             console.log(this.state.song);
             this.audioLoad();
             this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
+          } else {
+            this.emptyPlaylist();
           }
         });
       });
@@ -86,7 +89,7 @@ class AudioPlayer extends Component {
   };
 
   emptyPlaylist(){
-
+    console.log("sorry, playlist is empty");
   }
 
   readyPlayer = () => {
