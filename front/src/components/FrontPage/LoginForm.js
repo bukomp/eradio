@@ -63,6 +63,7 @@ class LoginForm extends Component {
     };
 
     console.log('Login is successful.', data);
+    this.props.signIn();
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
