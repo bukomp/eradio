@@ -97,7 +97,6 @@ class AudioPlayer extends Component {
     return(
       <React.Fragment>
         <audio
-          controls
           ref={this.player}
           onEnded={this.audioEnd}
         />
