@@ -3,11 +3,16 @@ import '../css/front.css';
 import RegistrationForm from './FrontPage/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
-import {Button} from '@material-ui/core';
+import {Button, TableFooter} from '@material-ui/core';
+import {Router, Switch, Route} from 'react-router-dom';
+import MdHeart from 'react-ionicons/lib/MdHeart'
+
+
 
 
 const FrontPage = (props) => {
   const [login, setLogin] = useState({isOpen: false, isOpenReg: false});
+
 
   const toggleLogin = () => {
     setLogin({
@@ -57,7 +62,13 @@ const FrontPage = (props) => {
               onClose={toggleRegistration}>
           </RegistrationForm>
 
+           <TableFooter><Button style={{
+          }}><MdHeart fontSize="60px" color="red" beat={true} />
+            <p style={{fontSize: "15px"}}> Did you like this song? Press like to impact on radio content and save song information in your profile</p></Button>
+        </TableFooter>
+
         </React.Fragment>
+
     );
 };
 

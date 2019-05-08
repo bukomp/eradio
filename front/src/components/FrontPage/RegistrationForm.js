@@ -4,6 +4,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 
+
 class RegistrationForm extends Component {
   constructor() {
     super();
@@ -12,6 +13,8 @@ class RegistrationForm extends Component {
       password: '',
       email: '',
       showPassword: false,
+      checked: false,
+
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -62,6 +65,7 @@ class RegistrationForm extends Component {
     if (!this.props.show) {
       return null;
     }
+    const { checked } = this.state;
 
 
     return (
@@ -131,7 +135,7 @@ class RegistrationForm extends Component {
                         backgroundColor: "lightslategrey",
                         padding: "14px 20px",
                         fontSize: "20px",
-                        width: "125px",
+                        width: "130px",
                         margin: "25px 0 0 62%"
                       }}>Save</Button>
 

@@ -46,7 +46,7 @@ const ListFile = ({file}) => {
           <p>Id:{file.file_id}    </p>
           <p> Artist: {JSON.parse(file.title).artist}  </p>
           <p> Title:{JSON.parse(file.title).title} </p>
-          <p>Duration in sec: {JSON.parse(file.title).duration}</p>
+          <p>Duration in sec: {JSON.parse(file.title).duration/1000}</p>
 
           <ReactAudioPlayer controls={true} src={url+file.filename}/>
          </Modal>
