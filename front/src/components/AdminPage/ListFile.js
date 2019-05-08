@@ -42,9 +42,9 @@ const ListFile = ({file}) => {
         <Button variant="outlined" size="small" color="primary" onClick={openModal}>Play</Button>
         <Modal isOpen={modal.modalIsOpen} style={customStyles}>
           <Button onClick={closeModal} style={{marginLeft: 600}}>close</Button>
-          <p>Id:{file.file_id}    </p>
-          <p> Artist: {JSON.parse(file.title).artist}  </p>
-          <p> Title:{JSON.parse(file.title).title} </p>
+          <p>Id: {file.file_id}    </p>
+          <p>Artist: {JSON.parse(file.title).artist}  </p>
+          <p>Title: {JSON.parse(file.title).title} </p>
           <p>Duration in sec: {JSON.parse(file.title).duration/1000}</p>
 
           <ReactAudioPlayer controls={true} src={url+file.filename}/>
