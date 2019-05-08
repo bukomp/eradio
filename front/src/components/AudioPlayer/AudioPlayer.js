@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {downloadPlaylist} from '../../misc/playlistApi';
 import {Button} from '@material-ui/core';
+import MdPlay from 'react-ionicons/lib/MdPlay'
 
 class AudioPlayer extends Component {
   constructor(props) {
@@ -96,11 +97,10 @@ class AudioPlayer extends Component {
     return(
       <React.Fragment>
         <audio
-          controls
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <Button onClick={this.audioPlay}>Play</Button>
+        <Button style={{borderRadius: "50%", width: "80px", height: "70px"}} onClick={this.audioPlay}><MdPlay fontSize="50px"/></Button>
       </React.Fragment>
     );
   };
