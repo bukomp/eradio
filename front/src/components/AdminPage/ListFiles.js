@@ -1,7 +1,13 @@
 import React from 'react';
-import {listEachFileInDB} from '../../misc/listEachFile';
+import ListFile from './ListFile';
 
 const ListFiles = ({files}) => {
+
+  const listEachFileInDB = (inFiles) => {
+    return inFiles
+    .filter(file => file.media_type==="audio")
+    .map(file => <ListFile file={file} key={file.file_id}/>)
+  };
 
   return (
       <div className='listFiles'>
