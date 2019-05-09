@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {downloadPlaylist} from '../../misc/playlistApi';
 import {Button} from '@material-ui/core';
 import MdPlay from 'react-ionicons/lib/MdPlay';
+import MdPause from 'react-ionicons/lib/MdPause';
 import vinyl from '../../img/vinyl.png';
 import '../../css/front.css';
 
@@ -39,6 +40,7 @@ class AudioPlayer extends Component {
       playlistTemp.song = this.state.webFrom + this.state.playlist[1].filename;
       this.player.current.src=playlistTemp.song;
       playlistTemp.playlist.shift();
+      this.props.getSongId(playlistTemp.playlist[0].id);
       console.log(playlistTemp);
       this.setState(playlistTemp);
     } else {/*
@@ -71,6 +73,7 @@ class AudioPlayer extends Component {
           if(this.state.playlist[0] !== undefined) {
             console.log(this.state.song);
             this.audioLoad();
+            this.props.getSongId(this.state.playlist[0].id);
             this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
           } else {
             this.emptyPlaylist();
@@ -102,7 +105,7 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "640px", position: "relative", marginLeft: "5%"}}>
+        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "calc(1vh + 640px)", position: "relative", marginLeft: "5%"}}>
           <Button style={{
           borderRadius: "50%",
           width: "55px",
@@ -110,7 +113,10 @@ class AudioPlayer extends Component {
           top: "44%",
           left: "36%",
           position: "absolute",
-        }} onClick={this.audioPlay}><MdPlay fontSize="50px"/></Button></div>
+        }} onClick={this.audioPlay}>
+            {this.state.paused && <MdPause fontSize="50px"/>}
+            {!this.state.paused && <MdPlay fontSize="50px"/>}
+          </Button></div>
       </React.Fragment>
     );
   };

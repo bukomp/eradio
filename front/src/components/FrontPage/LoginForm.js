@@ -22,7 +22,7 @@ class LoginForm extends Component {
 
   componentDidMount(){
     if(window.localStorage.getItem('token') !== "null" && window.localStorage.getItem('token') !== null && window.localStorage.getItem('token') !== undefined && window.localStorage.getItem('token') !==  "undefined"){
-      console.log(window.localStorage.getItem('token'));
+      //console.log(window.localStorage.getItem('token'));
       fetch('http://media.mw.metropolia.fi/wbma/users/user',{
         headers:{
           'x-access-token':window.localStorage.getItem('token')
@@ -30,7 +30,7 @@ class LoginForm extends Component {
       })
           .then(resp => resp.json())
           .then(resp => {
-        console.log(resp);
+        //console.log(resp);
         this.setState({username:resp.username, password:resp.password});
         this.props.signIn();
 

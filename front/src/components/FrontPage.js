@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../css/front.css';
+import {addFavourite} from '../misc/userApi'
 import RegistrationForm from './FrontPage/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
@@ -13,7 +14,7 @@ import ListFile from './AdminPage/ListFile'
 
 const FrontPage = (props) => {
   const [login, setLogin] = useState({isOpen: false, isOpenReg: false, loggedIn:false});
-
+  const [music, setMusic] = useState({musicPlayingId: null});
 
   const toggleLogin = () => {
     setLogin({
@@ -25,6 +26,12 @@ const FrontPage = (props) => {
     setLogin({
       loggedIn: true
     });
+  };
+
+  const getSongId = (id) => {
+    if(id !== null && id !== undefined && id !== "undefined" && id !== "null")setMusic({
+      musicPlayingId: id
+    })
   };
 
   const toggleRegistration = () => {
@@ -42,8 +49,8 @@ const FrontPage = (props) => {
   };
 
   const likedSong = () => {
-
-  }
+    addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).this(res => console.log(res)).catch(err => console.log(err));
+  };
 
 
     return (
@@ -102,11 +109,11 @@ const FrontPage = (props) => {
               onClose={toggleRegistration}>
           </RegistrationForm>
 
-          <AudioPlayer/>
+          <AudioPlayer getSongId={getSongId}/>
 
           {login.loggedIn &&
             <div>
-              <Button onclick={likedSong} style={{
+              <Button onClick={likedSong} style={{
                 borderRadius: "50%",
                 width: "80px",
                 height: "70px",
