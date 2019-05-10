@@ -28,7 +28,8 @@ const FrontPage = (props) => {
   const getSongId = (id) => {
     if(id !== null && id !== undefined && id !== "undefined" && id !== "null")setMusic({
       musicPlayingId: id
-    })
+    });
+    setTimeout(console.log(music.musicPlayingId), 500);
   };
 
   const toggleRegistration = () => {
@@ -46,7 +47,11 @@ const FrontPage = (props) => {
   };
 
   const likedSong = () => {
-    if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null")addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).this(res => console.log(res)).catch(err => console.log(err));
+    if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null"){
+      console.log(window.localStorage.getItem('token'));
+      addFavourite(window.localStorage.getItem('token'), 45)
+        .this(res => console.log(res)).catch(err => console.log(err))
+    }
   };
 
     return (

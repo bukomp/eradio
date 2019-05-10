@@ -106,7 +106,7 @@ class AudioPlayer extends Component {
           onEnded={this.audioEnd}
         />
         <div className="vinyl" style={{height: "490px", width: "620px", position: "relative", marginLeft: "5%", marginTop: "10px"}}>
-          <Button sclassName="playButton" style={{
+          <Button className="playButton" style={{
           borderRadius: "50%",
           width: "55px",
           height: "60px",
