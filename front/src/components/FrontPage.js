@@ -49,7 +49,7 @@ const FrontPage = (props) => {
   const likedSong = () => {
     if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null"){
       console.log(window.localStorage.getItem('token'));
-      addFavourite(window.localStorage.getItem('token'), 45)
+      addFavourite(window.localStorage.getItem('token'), music.musicPlayingId)
         .then(res => console.log(res)).catch(err => console.log(err))
     }
   };
