@@ -6,10 +6,7 @@ import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
 import {Button} from '@material-ui/core';
 import MdHeart from 'react-ionicons/lib/MdHeart'
-import Modal from 'react-modal';
-import ListFile from './AdminPage/ListFile'
-
-
+import MdMusicalNote from 'react-ionicons/lib/MdMusicalNote'
 
 
 const FrontPage = (props) => {
@@ -52,12 +49,11 @@ const FrontPage = (props) => {
     addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).this(res => console.log(res)).catch(err => console.log(err));
   };
 
-
     return (
         <React.Fragment>
 
           {!login.loggedIn &&
-          <Button variant={"contained"}
+          <Button className={"LoginButton"} variant={"contained"}
                   style={{
                     borderRadius: 35,
                     backgroundColor: "lightslategrey",
@@ -78,7 +74,7 @@ const FrontPage = (props) => {
                     padding: "14px 20px",
                     fontSize: "18px",
                     width: "150px",
-                    marginLeft: "85%",
+                    marginLeft: "75%",
                     marginTop: "5px"
                   }}onClick={logout}>Logout</Button>
           }
@@ -87,7 +83,7 @@ const FrontPage = (props) => {
           <div className="preference">
             <h2>Please check your preferences here</h2>
             <ul>
-              <li><p></p></li>
+              <li><MdMusicalNote/></li>
             </ul>
           </div>
           }
@@ -104,10 +100,12 @@ const FrontPage = (props) => {
           }} onClick={toggleRegistration}>Be an active listener. Register here.</Button>
           </LoginForm>
 
+
           <RegistrationForm
               show={login.isOpenReg}
               onClose={toggleRegistration}>
           </RegistrationForm>
+
 
           <AudioPlayer getSongId={getSongId}/>
 
@@ -124,7 +122,7 @@ const FrontPage = (props) => {
                           beat={true}/>
               </Button>
 
-              <br/><p style={{fontSize: "22px", marginLeft: "3%"}}> <br/>Press like
+              <br/><p style={{fontSize: "20px", marginLeft: "3%"}}> <br/>Press like
                 to impact on radio content and save song information in your
                 profile</p>
             </div>

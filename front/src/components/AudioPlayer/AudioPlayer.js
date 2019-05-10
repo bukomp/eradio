@@ -105,8 +105,8 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <div style={{background: `url(${vinyl}) no-repeat`, height: "521px", width: "calc(1vh + 640px)", position: "relative", marginLeft: "5%"}}>
-          <Button style={{
+        <div className="vinyl" style={{height: "490px", width: "620px", position: "relative", marginLeft: "5%", marginTop: "10px"}}>
+          <Button sclassName="playButton" style={{
           borderRadius: "50%",
           width: "55px",
           height: "60px",
@@ -116,8 +116,10 @@ class AudioPlayer extends Component {
         }} onClick={this.audioPlay}>
             {this.state.paused && <MdPause fontSize="50px"/>}
             {!this.state.paused && <MdPlay fontSize="50px"/>}
-          </Button></div>
+          </Button>
+        </div>
       </React.Fragment>
+
     );
   };
 

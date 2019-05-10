@@ -8,7 +8,11 @@ hr {
     border-radius: 5px;
     margin-top: 10px;
     margin-left: 3px;
+}
 
+ul{
+margin-top: 35px;
+list-style-type: none;
 }
 
 p{
@@ -30,19 +34,24 @@ p{
     position: absolute;
 }
 
+.vinyl{
+    background-image: url("../img/vinyl.png");
+}
+
 h2{
     text-align: center;
     text-decoration-line:underline;
+    font-size: 22px;
 }
 
 .preference{
     background-color: whitesmoke;
     border-radius: 5px;
-    border-style: double;
-    width: 30%;
-    height: 400px;
-    margin-left: 50%;
-
+    border-style: outset;
+    border-width: 5px;
+    width: 27%;
+    height: 470px;
+    margin-left: 47%;
     position: absolute;
     overflow: auto;
 
@@ -51,12 +60,37 @@ h2{
 @media screen and (min-width: 600px) and (max-width: 1200px) {
 
     .modal{
-        width: 310px;
+        width: 250px;
         height: 440px;
         margin-left: 48%;
         margin-top: 0;
         padding: 15px;
-
     }
-    
+
+    .vinyl {
+        background-image: url("../img/vinylXS.png");
+        background-repeat: no-repeat;
+        margin-left: 0;
+        position: relative;
+    }
+
+    .preference{
+        width: 30%;
+        margin-left: 68%;
+    }
+
+.MuiButtonBase-root-27.MuiButton-root-1.MuiButton-text-3.MuiButton-flat-6{
+        margin-top: 60px;
+        margin-left: -95px;
+        position: absolute;
+    }
+    .MuiButtonBase-root-27.MuiButton-root-1.MuiButton-contained-12.MuiButton-raised-15{
+
+        font-size: 14px;
+        width: 20px;
+        margin: 25px 0 15px 75%;
+}
+    .MuiButtonBase-root-27.MuiButton-root-1.MuiButton-text-3.MuiButton-flat-6{
+        margin-top: 10px;
+    }
 }
