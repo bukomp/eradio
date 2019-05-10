@@ -46,7 +46,7 @@ const FrontPage = (props) => {
   };
 
   const likedSong = () => {
-    if(id !== null && id !== undefined && id !== "undefined" && id !== "null")addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).this(res => console.log(res)).catch(err => console.log(err));
+    if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null")addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).this(res => console.log(res)).catch(err => console.log(err));
   };
 
     return (
