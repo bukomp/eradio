@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../css/front.css';
-import {addFavourite} from '../misc/userApi'
+import {addFavourite} from '../misc/userApi';
 import RegistrationForm from './FrontPage/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
@@ -50,7 +50,7 @@ const FrontPage = (props) => {
     if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null"){
       console.log(window.localStorage.getItem('token'));
       addFavourite(window.localStorage.getItem('token'), 45)
-        .this(res => console.log(res)).catch(err => console.log(err))
+        .then(res => console.log(res)).catch(err => console.log(err))
     }
   };
 
