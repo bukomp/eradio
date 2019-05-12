@@ -9,7 +9,7 @@ import RegistrationForm
 
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename={'/school/webradio/front/'}>
       <Route path='/' exact component={FrontPage}/>
       <Route path='/admin/' component={AdminPage}/>
       <Route path='/RegistrationForm/' component={RegistrationForm}/>
