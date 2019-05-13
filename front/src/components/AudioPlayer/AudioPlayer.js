@@ -9,7 +9,7 @@ class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paused: false,
+      paused: true,
       playlist: [],
       webFrom: "http://media.mw.metropolia.fi/wbma/uploads/",
       song: "",
@@ -28,7 +28,11 @@ class AudioPlayer extends Component {
         playlistTemp.playlist.push(g);
       }
     }
-    if(playlistTemp.playlist.length > 0){playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].filename;playlistTemp.playReady = true;}
+    if(playlistTemp.playlist.length > 0){
+      playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].filename;
+      playlistTemp.playReady = true;
+      playlistTemp.paused = false;
+    }
     console.log(playlistTemp);
     return playlistTemp;
   }
@@ -42,19 +46,7 @@ class AudioPlayer extends Component {
       this.props.getSongId(playlistTemp.playlist[0].id);
       console.log(playlistTemp);
       this.setState(playlistTemp);
-    } else {/*
-      this.player.current.pause();
-      downloadPlaylist().then(res => {
-        this.setState(this.sortTodayPlaylist(res),()=>{
-          if(this.state.playlist[0] !== undefined) {
-            console.log(this.state.song);
-            this.audioLoad();
-            this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
-          } else {
-            this.emptyPlaylist();
-          }
-        });
-      });*/
+    } else {
       this.emptyPlaylist();
     }
   };
@@ -108,8 +100,8 @@ class AudioPlayer extends Component {
           <div className={"vinyl"}>
           <Button className={"playButton"}
          onClick={this.audioPlay}>
-            {this.state.paused && <MdPause fontSize="50px"/>}
-            {!this.state.paused && <MdPlay fontSize="50px"/>}
+            {this.state.paused && <MdPlay fontSize="50px"/>}
+            {!this.state.paused && <MdPause fontSize="50px"/>}
           </Button>
         </div></div>
       </React.Fragment>
