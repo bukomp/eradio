@@ -132,19 +132,23 @@ class RegistrationForm extends Component {
                         borderRadius: 35,
                         backgroundColor: "lightslategrey",
                         padding: "14px 20px",
-                        fontSize: "20px",
+                        fontSize: "30px",
                         width: "130px",
-                        margin: "25px 0 0 62%"
+                        margin: "20px 0 0 62%",
+                        fontFamily: "Font",
+                        fontWeight: "bold"
                       }}>Save</Button>
 
             <Button
                 variant={"contained"}
                 style={{
                   borderRadius: "35px",
-                  margin: "-90px 0 0 0",
+                  margin: "-102px 0 0 0",
                   width: "125px",
-                  padding: "15px 20px",
-                  fontSize: "20px",
+                  padding: "15px 17px",
+                  fontSize: "29px",
+                  fontFamily: "Font",
+                  fontWeight: "bold"
                 }}
                 className="close"
                 onClick={this.props.onClose}>

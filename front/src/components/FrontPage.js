@@ -5,12 +5,15 @@ import RegistrationForm from './FrontPage/RegistrationForm';
 import LoginForm from './FrontPage/LoginForm';
 import AudioPlayer from "./AudioPlayer/AudioPlayer";
 import {Button} from '@material-ui/core';
-import MdHeart from 'react-ionicons/lib/MdHeart'
-import MdMusicalNote from 'react-ionicons/lib/MdMusicalNote'
+import MdHeart from 'react-ionicons/lib/MdHeart';
+import MdPlay from 'react-ionicons/lib/MdPlay';
+import MdMusicalNote from 'react-ionicons/lib/MdMusicalNote';
+import { Header } from 'semantic-ui-react';
 
 
 const FrontPage = (props) => {
-  const [login, setLogin] = useState({isOpen: false, isOpenReg: false, loggedIn:false});
+  const [login, setLogin] = useState(
+      {isOpen: false, isOpenReg: false, loggedIn: false});
   const [music, setMusic] = useState({musicPlayingId: null});
 
   const toggleLogin = () => {
@@ -26,7 +29,8 @@ const FrontPage = (props) => {
   };
 
   const getSongId = (id) => {
-    if(id !== null && id !== undefined && id !== "undefined" && id !== "null")setMusic({
+    if (id !== null && id !== undefined && id !== "undefined" && id !==
+        "null") setMusic({
       musicPlayingId: id
     });
     setTimeout(console.log(music.musicPlayingId), 500);
@@ -40,58 +44,74 @@ const FrontPage = (props) => {
 
   const logout = () => {
     setLogin({
-      loggedIn:false
+      loggedIn: false
     });
     window.localStorage.clear();
     setLogin({user: null})
   };
 
   const likedSong = () => {
-    if(music.musicPlayingId !== null && music.musicPlayingId !== undefined && music.musicPlayingId !== "undefined" && music.musicPlayingId !== "null"){
+    if (music.musicPlayingId !== null && music.musicPlayingId !== undefined &&
+        music.musicPlayingId !== "undefined" && music.musicPlayingId !==
+        "null") {
       console.log(window.localStorage.getItem('token'));
-      addFavourite(window.localStorage.getItem('token'), music.musicPlayingId)
-        .then(res => console.log(res)).catch(err => console.log(err))
+      addFavourite(window.localStorage.getItem('token'), music.musicPlayingId).
+          then(res => console.log(res)).
+          catch(err => console.log(err))
     }
   };
+
+
 
     return (
         <React.Fragment>
 
           {!login.loggedIn &&
-          <Button className={"LoginButton"} variant={"contained"}
+          <header className={"loginHeader"}>
+            <div className={"right"}>
+              <h3> Press <MdPlay/> button in the middle to enjoy the radio listening</h3></div>
+            <div className={"left"}><Button className={"LoginButton"} variant={"contained"}
                   style={{
                     borderRadius: 35,
                     backgroundColor: "lightslategrey",
-                    padding: "14px 20px",
-                    fontSize: "18px",
+                    padding: "14px 15px",
+                    fontSize: "30px",
                     width: "150px",
-                    margin: "25px 0 15px 75%",
+                    marginLeft: "40%",
+                    marginTop: "10px",
                     zIndex: "999",
-                    position: "absolute"
+                    fontFamily: "Font",
+                    fontWeight: "bold"
+
                   }}
-                  onClick={toggleLogin}>Login</Button>
+                    onClick={toggleLogin}>Login</Button></div>
+
+          </header>
           }
           {login.loggedIn &&
-          <Button variant={"contained"}
+          <header className="right"> <Button variant={"contained"}
                   style={{
                     borderRadius: 35,
                     backgroundColor: "lightslategrey",
                     padding: "14px 20px",
-                    fontSize: "18px",
+                    fontSize: "30px",
                     width: "150px",
-                    marginLeft: "75%",
-                    marginTop: "5px"
-                  }}onClick={logout}>Logout</Button>
+                    marginLeft: "5%",
+                    marginTop: "5px",
+                    fontFamily: "Font",
+                    fontWeight: "bold"
+                  }}onClick={logout}>Logout</Button></header>
           }
 
           {login.loggedIn &&
-          <div className="preference">
-            <h2>Please check your preferences here</h2>
+          <div className={"preference"}>
+            <h2>Check your preferences here</h2>
             <ul>
               <li><MdMusicalNote/></li>
             </ul>
           </div>
           }
+
           <LoginForm
               show={login.isOpen}
               onClose={toggleLogin}
@@ -101,8 +121,10 @@ const FrontPage = (props) => {
 
           <Button style={{
             margin: "25px 0 25px 0",
-            fontSize: "25px",
-          }} onClick={toggleRegistration}>Be an active listener. Register here.</Button>
+            fontSize: "26px",
+            fontFamily: "Font",
+            fontWeight: "bold"
+          }} onClick={toggleRegistration}>Be an active listener. Press here.</Button>
           </LoginForm>
 
 
@@ -112,24 +134,19 @@ const FrontPage = (props) => {
           </RegistrationForm>
 
 
-          <AudioPlayer getSongId={getSongId}/>
+          <div className="player"> <AudioPlayer getSongId={getSongId}/></div>
 
           {login.loggedIn &&
             <div>
-              <Button onClick={likedSong} style={{
+              <div className={"like"}><Button onClick={likedSong} style={{
                 borderRadius: "50%",
                 width: "80px",
-                height: "70px",
-                position: "absolute",
-                marginLeft: "298px",
-                marginTop: 0
-              }}><MdHeart fontSize="80px" color="red"
+                height: "77px",
+              }}><MdHeart fontSize="83px" color="red"
                           beat={true}/>
-              </Button>
+              </Button></div>
 
-              <br/><p style={{fontSize: "20px", marginLeft: "3%"}}> <br/>Press like
-                to impact on radio content and save song information in your
-                profile</p>
+              <br/><div className={"likeText"}><p>Press <MdHeart/> to impact on radio content and save song's name in preference list</p></div>
             </div>
           }
 

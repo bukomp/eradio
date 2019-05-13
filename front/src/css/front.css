@@ -1,7 +1,36 @@
 body{
     background-color: #cccccc;
+    font-family: Font;
 }
 
+@font-face {
+    font-family: 'Font';
+    src: URL('AcLine.otf') format('truetype');
+}
+
+h1{
+    margin-left: 2%;
+}
+
+h2{
+    text-align: center;
+    text-decoration-line:underline;
+    font-size: 30px;
+}
+
+h3{
+    font-size: 27px;
+    margin-left: 15px;
+
+}
+
+p{
+    font-size: 30px;
+    margin-top: 35px;
+    margin-left: 10px;
+    font-weight: bold;
+
+}
 
 hr {
     border-top: 2px solid lightslategrey;
@@ -11,86 +40,137 @@ hr {
 }
 
 ul{
-margin-top: 35px;
-list-style-type: none;
+    margin-top: 35px;
+    list-style-type: none;
 }
 
-p{
-    font-size: 24px;
-    margin-top: 50px;
-    margin-left: 5px;
-    font-weight: bold;
-}
-
+/*modal*/
 .modal {
     background-color: whitesmoke;
     border: black solid 5px;
     border-radius: 5px;
-    width: 350px;
+    width: 370px;
     height: 435px;
-    margin-left: 65%;
-    margin-top: 6%;
+    margin-left: 61%;
+    margin-top: 100px;
     padding: 15px;
     position: absolute;
 }
 
+/*header*/
+.loginHeader{
+    display: inline;
+    width: 100vw;
+    height: 300px;
+    margin-top: 0;
+}
+
+.right {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+}
+
+.left {
+    box-sizing: border-box;
+    float: right;
+    width: 50%;
+}
+
+/*main*/
 .vinyl{
     background-image: url("../img/vinyl.png");
+    height: 490px;
+    width: 620px;
+    position: absolute;
+    left: 5%;
+    top: 80px;
 }
 
-h2{
-    text-align: center;
-    text-decoration-line:underline;
-    font-size: 22px;
+.playButton{
+    border-radius: 50%;
+    width: 55px;
+    height: 60px;
+    top: 44%;
+    left: 36%;
 }
 
+/*like*/
+.like {
+    border-radius: 50%;
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 560px;
+    left: 290px;
+}
+
+.likeText{
+    font-size: 20px;
+    left: 50px;
+    top: 85%;
+    position: absolute;
+}
+
+/*preference window*/
 .preference{
     background-color: whitesmoke;
     border-radius: 5px;
     border-style: outset;
     border-width: 5px;
-    width: 27%;
-    height: 470px;
-    margin-left: 47%;
+    width: 33%;
+    height: 500px;
+    left: 62%;
+    margin-top: 70px;
     position: absolute;
     overflow: auto;
-
 }
 
-@media screen and (min-width: 600px) and (max-width: 1200px) {
-
-    .modal{
-        width: 250px;
+@media screen and (min-width: 600px) and (max-width: 1100px) {
+    .modal {
+        width: 400px;
         height: 440px;
-        margin-left: 48%;
-        margin-top: 0;
-        padding: 15px;
+        left: 0;
+        margin-left: 70px;
+        top: 480px;
     }
 
     .vinyl {
         background-image: url("../img/vinylXS.png");
         background-repeat: no-repeat;
-        margin-left: 0;
-        position: relative;
+        top: 100px;
+        left: 100px;
     }
 
-    .preference{
-        width: 30%;
-        margin-left: 68%;
+    .playButton{
+        top: 170px;
+        left: 165px;
     }
 
-.MuiButtonBase-root-27.MuiButton-root-1.MuiButton-text-3.MuiButton-flat-6{
-        margin-top: 60px;
-        margin-left: -95px;
-        position: absolute;
+    .like {
+        top: 495px;
+        left: 250px;
     }
-    .MuiButtonBase-root-27.MuiButton-root-1.MuiButton-contained-12.MuiButton-raised-15{
 
-        font-size: 14px;
-        width: 20px;
-        margin: 25px 0 15px 75%;
+    .likeText{
+        top: 535px;
+        left: 25px;
+    }
+
+    .likeText p{
+        font-size: 25px;
+    }
+
+    .likeText p{
+        font-size: 16px;
+
+    }
+
+    .preference {
+        width: 500px;
+        top: 560px;
+        left: 30px;
+        overflow: auto;
+    }
 }
-    .MuiButtonBase-root-27.MuiButton-root-1.MuiButton-text-3.MuiButton-flat-6{
-        margin-top: 10px;
-    }
-}
+

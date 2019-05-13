@@ -140,9 +140,11 @@ class LoginForm extends Component {
                         borderRadius: "35px",
                         backgroundColor: "lightslategrey",
                         padding: "15px 20px",
-                        fontSize: "20px",
+                        fontSize: "30px",
                         width: "125px",
-                        margin: "25px 0 5px 62%"
+                        margin: "25px 0 5px 62%",
+                        fontFamily: "Font",
+                        fontWeight: "bold"
                       }}
                       >Sign In</Button>
 
@@ -152,14 +154,14 @@ class LoginForm extends Component {
                       margin: "-105px 0 0 0",
                       width: "125px",
                       padding: "15px 15px",
-                      fontSize: "20px",
+                      fontSize: "30px",
+                      fontFamily: "Font",
+                      fontWeight: "bold"
                     }}
                     className="close"
                     onClick={this.props.onClose}>
               Close
             </Button>
-
-
           </div>
           </form>
 

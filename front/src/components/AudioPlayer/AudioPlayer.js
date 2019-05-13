@@ -105,19 +105,14 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <div className="vinyl" style={{height: "490px", width: "620px", position: "relative", marginLeft: "5%", marginTop: "10px"}}>
-          <Button className="playButton" style={{
-          borderRadius: "50%",
-          width: "55px",
-          height: "60px",
-          top: "44%",
-          left: "36%",
-          position: "absolute",
-        }} onClick={this.audioPlay}>
+        <div className={"main"} style={{position: "relative"}}>
+          <div className={"vinyl"}>
+          <Button className={"playButton"}
+         onClick={this.audioPlay}>
             {this.state.paused && <MdPause fontSize="50px"/>}
             {!this.state.paused && <MdPlay fontSize="50px"/>}
           </Button>
-        </div>
+        </div></div>
       </React.Fragment>
 
     );
