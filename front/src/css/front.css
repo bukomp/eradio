@@ -126,7 +126,7 @@ ul{
     overflow: auto;
 }
 
-@media screen and (min-width: 600px) and (max-width: 1100px) {
+@media screen and (max-width: 1100px) {
     .modal {
         width: 400px;
         height: 440px;
