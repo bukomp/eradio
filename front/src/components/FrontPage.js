@@ -8,7 +8,6 @@ import {Button} from '@material-ui/core';
 import MdHeart from 'react-ionicons/lib/MdHeart';
 import MdPlay from 'react-ionicons/lib/MdPlay';
 import MdMusicalNote from 'react-ionicons/lib/MdMusicalNote';
-import { Header } from 'semantic-ui-react';
 
 
 const FrontPage = (props) => {
@@ -60,8 +59,6 @@ const FrontPage = (props) => {
           catch(err => console.log(err))
     }
   };
-
-
 
     return (
         <React.Fragment>
@@ -120,7 +117,7 @@ const FrontPage = (props) => {
           >
 
           <Button style={{
-            margin: "25px 0 25px 0",
+            margin: "25px 0 25px 10px",
             fontSize: "26px",
             fontFamily: "Font",
             fontWeight: "bold"
@@ -149,8 +146,6 @@ const FrontPage = (props) => {
               <br/><div className={"likeText"}><p>Press <MdHeart/> to impact on radio content and save song's name in preference list</p></div>
             </div>
           }
-
-
         </React.Fragment>
 
     );

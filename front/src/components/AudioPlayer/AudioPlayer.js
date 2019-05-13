@@ -3,14 +3,13 @@ import {downloadPlaylist} from '../../misc/playlistApi';
 import {Button} from '@material-ui/core';
 import MdPlay from 'react-ionicons/lib/MdPlay';
 import MdPause from 'react-ionicons/lib/MdPause';
-import vinyl from '../../img/vinyl.png';
 import '../../css/front.css';
 
 class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paused: true,
+      paused: false,
       playlist: [],
       webFrom: "http://media.mw.metropolia.fi/wbma/uploads/",
       song: "",
@@ -29,11 +28,7 @@ class AudioPlayer extends Component {
         playlistTemp.playlist.push(g);
       }
     }
-    if(playlistTemp.playlist.length > 0){
-      playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].filename;
-      playlistTemp.playReady = true;
-      playlistTemp.paused = false;
-    }
+    if(playlistTemp.playlist.length > 0){playlistTemp.song = playlistTemp.webFrom+playlistTemp.playlist[0].filename;playlistTemp.playReady = true;}
     console.log(playlistTemp);
     return playlistTemp;
   }
@@ -47,7 +42,19 @@ class AudioPlayer extends Component {
       this.props.getSongId(playlistTemp.playlist[0].id);
       console.log(playlistTemp);
       this.setState(playlistTemp);
-    } else {
+    } else {/*
+      this.player.current.pause();
+      downloadPlaylist().then(res => {
+        this.setState(this.sortTodayPlaylist(res),()=>{
+          if(this.state.playlist[0] !== undefined) {
+            console.log(this.state.song);
+            this.audioLoad();
+            this.player.current.play().then(()=>{this.player.current.autoplay=true}).catch(err => {console.log(err);})
+          } else {
+            this.emptyPlaylist();
+          }
+        });
+      });*/
       this.emptyPlaylist();
     }
   };
@@ -97,19 +104,14 @@ class AudioPlayer extends Component {
           ref={this.player}
           onEnded={this.audioEnd}
         />
-        <div className="vinyl" style={{height: "490px", width: "620px", position: "relative", marginLeft: "5%", marginTop: "10px"}}>
-          <Button className="playButton" style={{
-          borderRadius: "50%",
-          width: "55px",
-          height: "60px",
-          top: "44%",
-          left: "36%",
-          position: "absolute",
-        }} onClick={this.audioPlay}>
-            {this.state.paused && <MdPlay fontSize="50px"/>}
-            {!this.state.paused && <MdPause fontSize="50px"/>}
+        <div className={"main"} style={{position: "relative"}}>
+          <div className={"vinyl"}>
+          <Button className={"playButton"}
+         onClick={this.audioPlay}>
+            {this.state.paused && <MdPause fontSize="50px"/>}
+            {!this.state.paused && <MdPlay fontSize="50px"/>}
           </Button>
-        </div>
+        </div></div>
       </React.Fragment>
 
     );
