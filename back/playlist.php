@@ -31,6 +31,35 @@ function download(){
     return $tempArr;
 }
 
+function update(){
+
+    $date = round(microtime(true) * 1000);
+    $pl = json_decode(download(), true);
+
+    for($i = 0; $i<count($pl["data"]); $i++){
+        $pl["data"][$i]["time"] = $date;
+        for($j = 0; $j<$i; $j++){
+            $pl["data"][$i]["time"] = $pl["data"][$i]["time"] + $pl["data"][$j]["duration"];
+        }
+    }
+    for($i = 0; $i<count($pl["data"]); $i++){
+        unset($pl["data"][$i]["title"]);
+        unset($pl["data"][$i]["duration"]);
+        unset($pl["data"][$i]["artist"]);
+        unset($pl["data"][$i]["filename"]);
+
+    }
+
+
+    $pl = json_encode($pl);
+
+    $f = fopen("playlist.json","w");
+    fwrite($f, $pl);
+    fclose($f);
+
+    return $pl;
+}
+
 function played(){
     $playlistFile = fopen("playlist.json","r");
     $playlist = fread($playlistFile, filesize("playlist.json"));
@@ -52,6 +81,9 @@ switch($uriSegments[5]){
         break;
     case "download":
         echo download();
+        break;
+    case "update":
+        echo update();
         break;
     default:
         echo '<h1>URL should look like this: http://lira.fi/school/webradio/back/playlist.php/"any from below here" <br><br>download<br>upload</h1>';
